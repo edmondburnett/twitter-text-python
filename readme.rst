@@ -3,7 +3,7 @@ AtarashiiFormat
 
 **AtarashiiFormat** is the Tweet Parser and Formatter that's used by Atarashii_.
 
-It is based on the Java Implemenation_ of the Twitter Text Library.
+It is based on the Java Implementation_ of the Twitter Text Library.
 The unittests are nearly a excact copy of the ones for the Java Library_.
 
 .. _Implementation: http://github.com/mzsanford/twitter-text-java
