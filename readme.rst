@@ -4,17 +4,13 @@ AtarashiiFormat
 **AtarashiiFormat** is the Tweet Parser and Formatter that's used by Atarashii_.
 
 It is based on the Java Implementation_ of the Twitter Text Library.
-The unittests are nearly a excact copy of the ones for the Java Library_.
+The unittests are nearly a exact copy of the ones for the Java Library_.
 
 .. _Implementation: http://github.com/mzsanford/twitter-text-java
 .. _Library: http://github.com/mzsanford/twitter-text-conformance/blob/master/autolink.yml
 .. _Atarashii: http://github.com/BonsaiDen/Atarashii/
 
-
-Usage
------
-
-Simple demonstration::
+Usage::
 
     >>> import format
     >>> f = format.Formatter()
