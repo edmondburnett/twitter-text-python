@@ -201,8 +201,8 @@ class Formatter:
     
     # User defined Formatters
     def format_tag(self, tag, text):
-        return '<a href="http://search.twitter.com/search?%s">%s%s</a>' \
-                % (urllib.urlencode({'q': '#' + text}), tag, text)
+        return '<a href="http://search.twitter.com/search?q=%s">%s%s</a>' \
+                % (urllib.quote('#' + text.encode('utf-8')), tag, text)
     
     def format_username(self, at, user):
         return '<a href="http://twitter.com/%s">%s%s</a>' % (user, at, user)
