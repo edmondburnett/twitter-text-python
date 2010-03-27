@@ -14,17 +14,19 @@ The unittests are nearly a excact copy of the ones for the Java Library_.
 Usage
 -----
 
-``>>> import format
->>> f = format.Formatter()
->>> html = f.parse("@BonsaiDen That's a great parser! #AtarashiiFormat")
->>> html
-u'<a href="http://twitter.com/BonsaiDen">@BonsaiDen</a> That\'s a great parser! <a href="http://search.twitter.com/search?q=%23AtarashiiFormat">#AtarashiiFormat</a>'
->>> f.users
-['BonsaiDen']
->>> f.tags
-['AtarashiiFormat']
->>> f.urls
-[]``
+Simple demonstration::
+
+    >>> import format
+    >>> f = format.Formatter()
+    >>> html = f.parse("@BonsaiDen That's a great parser! #AtarashiiFormat")
+    >>> html
+    u'<a href="http://twitter.com/BonsaiDen">@BonsaiDen</a> That\'s a great parser! <a href="http://search.twitter.com/search?q=%23AtarashiiFormat">#AtarashiiFormat</a>'
+    >>> f.users
+    ['BonsaiDen']
+    >>> f.tags
+    ['AtarashiiFormat']
+    >>> f.urls
+    []
 
 If you need different HTML output just subclass and override the ``format_*`` methods.
 
