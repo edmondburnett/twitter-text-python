@@ -64,7 +64,7 @@ PART_TAG = 3
 
 
 class Formatter:
-    """Tweet Formatter"""
+    """Tweet Parser and Formatter"""
 
     def __init__(self, max_url_length=30):
         self._max_url_length = max_url_length
@@ -72,10 +72,7 @@ class Formatter:
         self._parts = []
     
     def parse(self, text):
-        """Parse the text adn return a dict with the users, tags and
-        urls.
-        
-        """
+        """Parse the text and return a dict with the users, tags and urls."""
         
         # Reset
         self._urls = []
@@ -135,7 +132,7 @@ class Formatter:
         return data
     
     def _format(self):
-        """Create HTML from the parsed Tweet."""
+        """Create formatted HTML from the parsed Tweet."""
         
         result = []
         for i in self._parts:
@@ -188,7 +185,7 @@ class Formatter:
         return ''.join(result)
     
     def _shorten_url(self, text):
-        """Shorten a URL and make sure ot not cut of html entities."""
+        """Shorten a URL and make sure to not cut of html entities."""
         
         if len(text) > self._max_url_length:
             text = text[0:self._max_url_length - 3]
