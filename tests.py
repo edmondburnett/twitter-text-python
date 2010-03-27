@@ -439,32 +439,32 @@ if __name__ == '__main__':
         test = TESTS[k]
     
         expected = test['result']
-        result = f.parse(test['input'])
+        result = f.format(test['input'])
         
         # Users
-        if test.has_key('users') and test['users'] != f.users:
+        if test.has_key('users') and test['users'] != result['users']:
             print '#%s - Failed!' % k
             print 'E USERS: %s' % test['users']
-            print 'R USERS: %s' % f.users
+            print 'R USERS: %s' % result['users']
             FAILED += 1
         
         # Tags
-        elif test.has_key('tags') and test['tags'] != f.tags:
+        elif test.has_key('tags') and test['tags'] != result['tags']:
             print '#%s - Failed!' % k
             print 'E TAGS: %s' % test['tags']
-            print 'R TAGS: %s' % f.tags
+            print 'R TAGS: %s' % result['tags']
             FAILED += 1
         
         
         # URLS
-        elif test.has_key('urls') and test['urls'] != f.urls:
+        elif test.has_key('urls') and test['urls'] != result['urls']:
             print '#%s - Failed!' % k
             print 'E URLS: %s' % test['urls']
-            print 'R URLS: %s' % f.urls
+            print 'R URLS: %s' % result['urls']
             FAILED += 1
         
         # Text
-        elif result == expected:
+        elif result['html'] == expected:
             #print '#%s - Passed' % k
             PASSED += 1
         
@@ -472,7 +472,7 @@ if __name__ == '__main__':
             FAILED += 1
             print '#%s - Failed!' % k
             print 'E: %s' % expected
-            print 'R: %s' % result
+            print 'R: %s' % result['html']
     
     print "%d passed. %d failed." % (PASSED, FAILED)
 
