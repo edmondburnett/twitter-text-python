@@ -125,6 +125,12 @@ TESTS = {
         'tags' : []
     },
         
+    'hashtag_umlaut': {
+        'input': u'text #hash_tagüäö',
+        'result': u'text <a href="http://search.twitter.com/search?q=%23hash_tag%C3%BC%C3%A4%C3%B6">#hash_tagüäö</a>',
+        'tags' : [u'hash_tagüäö']
+    },   
+        
     'hashtag_multiple': {
         'input': u'text #hashtag1 #hashtag2',
         'result': u'text <a href="http://search.twitter.com/search?q=%23hashtag1">#hashtag1</a> <a href="http://search.twitter.com/search?q=%23hashtag2">#hashtag2</a>',
