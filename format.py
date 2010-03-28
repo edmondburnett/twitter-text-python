@@ -53,8 +53,7 @@ QUERY_ENDING_CHARS = '[a-z0-9_&=#]'
 URL_REGEX = re.compile('((' + PRE_CHARS + ')((https?://|www\\.)(' \
                        + DOMAIN_CHARS + ')(/' + PATH_CHARS + '*' \
                        + PATH_ENDING_CHARS + '?)?(\\?' + QUERY_CHARS + '*' \
-                       + QUERY_ENDING_CHARS + ')?))', re.UNICODE |re.IGNORECASE)
-
+                       + QUERY_ENDING_CHARS + ')?))', re.IGNORECASE)
 
 # Part constants
 PART_TEXT = 0
@@ -81,7 +80,7 @@ class Formatter:
         
         # Filter URLS first to make sure we get no problems with # and @ in them
         self._url_parts = []
-        URL_REGEX.sub(lambda url: self._url_parts.append(url), text)
+        URL_REGEX.sub(self._url_parts.append, text)
         self._parts = []
         last_position = 0
         for i in self._url_parts:
@@ -164,10 +163,9 @@ class Formatter:
             
             # Usernames
             elif part_type == PART_USER:
-                at = data[0:1]
                 user = data[1:]
                 self._users.append(user)
-                result.append(self.format_username(at, user))
+                result.append(self.format_username(data[0:1], user))
             
             # Hashtags 
             elif part_type == PART_TAG:
@@ -204,8 +202,9 @@ class Formatter:
         return '<a href="http://search.twitter.com/search?q=%s">%s%s</a>' \
                 % (urllib.quote('#' + text.encode('utf-8')), tag, text)
     
-    def format_username(self, at, user):
-        return '<a href="http://twitter.com/%s">%s%s</a>' % (user, at, user)
+    def format_username(self, at_char, user):
+        return '<a href="http://twitter.com/%s">%s%s</a>' \
+               % (user, at_char, user)
     
     def format_url(self, url, text):
         return '<a href="%s">%s</a>' % (escape(url), text)
