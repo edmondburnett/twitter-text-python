@@ -1,18 +1,18 @@
 # -*- coding: UTF-8 -*-
-#  This file is part of AtarashiiFormat.
+#  This file is part of twp.
 #
-#  AtarashiiFormat is free software: you can redistribute it and/or
+#  twp is free software: you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation, either version 3 of the License, or
 #  (at your option) any later version.
 #
-#  AtarashiiFormat is distributed in the hope that it will be useful,
+#  twp is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License along with
-#  AtarashiiFormat. If not, see <http://www.gnu.org/licenses/>.
+#  twp. If not, see <http://www.gnu.org/licenses/>.
 
 
 # Unittests --------------------------------------------------------------------
@@ -437,8 +437,8 @@ TESTS = {
 
 # Really bad unit tester!
 if __name__ == '__main__':
-    import format
-    f = format.Formatter()
+    import twp
+    f = twp.Formatter()
     PASSED = 0
     FAILED = 0
     for k in TESTS:
