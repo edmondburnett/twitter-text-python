@@ -14,6 +14,9 @@
 #  AtarashiiFormat. If not, see <http://www.gnu.org/licenses/>.
 
 # TODO add support for lists
+# TODO create a setup.py
+# TODO maybe rename the whole thing to "twitter-text-python" or "twp" or
+#      somthing like that
 
 # Tweet Parser and Formatter ---------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -30,7 +33,7 @@ ENTITIES = {
 def escape(text):
     return ''.join(ENTITIES.get(c, c) for c in text)  
 
-                                       
+
 # Some of this code has been translated from the twitter-text-java library:
 # <http://github.com/mzsanford/twitter-text-java>
 AT_REGEX = re.compile(ur'\B[@\uff20]([a-z0-9_]{1,20})', re.IGNORECASE)
@@ -62,6 +65,25 @@ PART_USER = 2
 PART_TAG = 3
 
 
+class ParseResult:
+    """A class containing the data of a parsed Tweet."""
+    
+    def __init__(self, urls, users, tags):
+        self.urls = urls
+        self.users = users
+        self.tags = tags
+
+
+class FormatResult:
+    """A class containing the data of a formatted Tweet."""
+    
+    def __init__(self, urls, users, tags, html):
+        self.urls = urls
+        self.users = users
+        self.tags = tags
+        self.html = html
+
+
 class Formatter:
     """Tweet Parser and Formatter"""
 
@@ -71,6 +93,12 @@ class Formatter:
         self._parts = []
     
     def parse(self, text):
+        """Parse the text and return a ParseResult instance."""
+        
+        data = self._parse(text)
+        return ParseResult(data['urls'], data['users'], data['tags'])
+    
+    def _parse(self, text):
         """Parse the text and return a dict with the users, tags and urls."""
         
         # Reset
@@ -103,6 +131,7 @@ class Formatter:
     
     def _parse_by(self, regex, filter_type):
         """Filter the text parts and split them up further."""
+        
         pos = 0
         while pos < len(self._parts):
             cur_type, data = self._parts[pos]
@@ -123,12 +152,11 @@ class Formatter:
             pos += 1
      
     def format(self, text):
-        """Parse the text and return a dict with the html, users, tags and urls.
-        """
+        """Parse the text and return a FormatResult instance."""
     
-        data = self.parse(text)
-        data.update({'html': self._format()})
-        return data
+        data = self._parse(text)
+        return FormatResult(data['urls'], data['users'],
+                            data['tags'], self._format())
     
     def _format(self):
         """Create formatted HTML from the parsed Tweet."""
@@ -199,13 +227,16 @@ class Formatter:
     
     # User defined Formatters
     def format_tag(self, tag, text):
+        """Return formatted HTML for a hashtag."""
         return '<a href="http://search.twitter.com/search?q=%s">%s%s</a>' \
                 % (urllib.quote('#' + text.encode('utf-8')), tag, text)
     
     def format_username(self, at_char, user):
+        """Return formatted HTML for a username."""
         return '<a href="http://twitter.com/%s">%s%s</a>' \
                % (user, at_char, user)
     
     def format_url(self, url, text):
+        """Return formatted HTML for a url."""
         return '<a href="%s">%s</a>' % (escape(url), text)
 
