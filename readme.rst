@@ -14,11 +14,17 @@ Usage::
 
     >>> import format
     >>> f = format.Formatter()
-    >>> data = f.format("@BonsaiDen Hey that's a great Tweet Parser! #AtarashiiFormat")
-    >>> data
-    {'html': u'<a href="http://twitter.com/BonsaiDen">@BonsaiDen</a> Hey that\'s a great Tweet Parser! <a href="http://search.twitter.com/search?q=%23AtarashiiFormat">#AtarashiiFormat</a>',
-    'users': ['BonsaiDen'], 'urls': [], 'tags': ['AtarashiiFormat']}
-
+    >>> result = f.format("@BonsaiDen Hey that's a great Tweet Parser! #AtarashiiFormat")
+    >>> result
+    <format.FormatResult instance at 0xb77d9aec>
+    >>> result.html
+    u'<a href="http://twitter.com/BonsaiDen">@BonsaiDen</a> Hey that\'s a great Tweet Parser! <a href="http://search.twitter.com/search?q=%23AtarashiiFormat">#AtarashiiFormat</a>'
+    >>> result.tags
+    ['AtarashiiFormat']
+    >>> result.users
+    ['BonsaiDen']
+    >>> result.urls
+    []
 
 
 If you need different HTML output just subclass and override the ``format_*`` methods.
