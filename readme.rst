@@ -19,7 +19,7 @@ Usage::
     <twp.ParseResult instance at 0xb77d9aec>
     >>> result.html
     u'<a href="http://twitter.com/BonsaiDen">@BonsaiDen</a> Hey that\'s a great Tweet Parser! 
-    <a href="http://search.twitter.com/search?q=%23AtarashiiFormat">#twp</a>'
+    <a href="http://search.twitter.com/search?q=%23twp">#twp</a>'
     >>> result.tags
     ['twp']
     >>> result.users
