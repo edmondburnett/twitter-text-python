@@ -91,7 +91,6 @@ class ParseResult:
     
     """
     
-    
     def __init__(self, urls, users, reply, tags, html):
         self.urls = urls
         self.users = users
