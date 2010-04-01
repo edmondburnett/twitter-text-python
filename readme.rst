@@ -13,10 +13,10 @@ The unittests are nearly a exact copy of the ones for the Java Library_.
 Usage::
 
     >>> import twp
-    >>> f = twp.Formatter()
-    >>> result = f.format("@BonsaiDen Hey that's a great Tweet Parser! #twp")
+    >>> p = twp.Parser()
+    >>> result = p.format("@BonsaiDen Hey that's a great Tweet Parser! #twp")
     >>> result
-    <twp.FormatResult instance at 0xb77d9aec>
+    <twp.ParseResult instance at 0xb77d9aec>
     >>> result.html
     u'<a href="http://twitter.com/BonsaiDen">@BonsaiDen</a> Hey that\'s a great Tweet Parser! 
     <a href="http://search.twitter.com/search?q=%23AtarashiiFormat">#twp</a>'

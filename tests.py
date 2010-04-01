@@ -438,14 +438,14 @@ TESTS = {
 # Really bad unit tester!
 if __name__ == '__main__':
     import twp
-    f = twp.Formatter()
+    f = twp.Parser()
     PASSED = 0
     FAILED = 0
     for k in TESTS:
         test = TESTS[k]
     
         expected = test['result']
-        result = f.format(test['input'])
+        result = f.parse(test['input'])
         
         # Users
         if test.has_key('users') and test['users'] != result.users:
@@ -460,7 +460,6 @@ if __name__ == '__main__':
             print 'E TAGS: %s' % test['tags']
             print 'R TAGS: %s' % result.tags
             FAILED += 1
-        
         
         # URLS
         elif test.has_key('urls') and test['urls'] != result.urls:
