@@ -15,7 +15,6 @@
 
 # TODO add support for lists
 # TODO create a setup.py
-# TODO cleanup the unittests
 
 
 # Tweet Parser and Formatter ---------------------------------------------------
@@ -63,8 +62,6 @@ class Parser:
     
     def __init__(self, max_url_length=30):
         self._max_url_length = max_url_length
-        self._url_parts = []
-        self._parts = []
     
     def parse(self, text):
         """Parse the text and return a ParseResult instance."""
