@@ -30,10 +30,11 @@ SPACES = ur'[\u0020\u00A0\u1680\u180E\u2002\u2003\u2004\u2005\u2006\u2007' \
 
 # Users
 USERNAME_REGEX = re.compile(ur'\B' + AT_SIGNS \
-                 + ur'([a-z0-9_]{1,20})(/[a-z][a-z0-9\\x80-\\xFF-]{0,79})?', re.IGNORECASE)
+                 + ur'([a-z0-9_]{1,20})(/[a-z][a-z0-9\\x80-\\xFF-]{0,79})?',
+                 re.IGNORECASE)
 
 REPLY_REGEX = re.compile(ur'^(?:' + SPACES + ur')*' + AT_SIGNS \
-              + ur'([a-z0-9_]{1,20}).*', re.IGNORECASE);
+              + ur'([a-z0-9_]{1,20}).*', re.IGNORECASE)
 
 # Hashtags
 HASHTAG_EXP = ur'(^|[^0-9A-Z&/]+)(#|\uff03)([0-9A-Z_]*[A-Z_]+[%s]*)' % UTF_CHARS
@@ -187,9 +188,11 @@ class Parser:
         mat = match.group(0)
         
         # Fix problems with the regex capturing stuff infront of the #
-        for tag in u'#\uff03':
-            pos = mat.rfind(tag)
+        tag = None
+        for i in u'#\uff03':
+            pos = mat.rfind(i)
             if pos != -1:
+                tag = i
                 break
         
         pre, text = mat[:pos], mat[pos + 1:]
