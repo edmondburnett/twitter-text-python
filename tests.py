@@ -389,8 +389,34 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text @username')
         self.assertEqual(result.html, u'text <a href="http://twitter.com/username">@username</a>')
         self.assertEqual(result.users, [u'username'])
-  
+    
+    # Replies
+    def test_username_reply_simple(self):
+        result = self.parser.parse(u'@username')
+        self.assertEqual(result.html, u'<a href="http://twitter.com/username">@username</a>')
+        self.assertEqual(result.users, [u'username'])
+        self.assertEqual(result.reply, u'username')
+    
+    def test_username_reply_whitespace(self):
+        result = self.parser.parse(u'   @username')
+        self.assertEqual(result.html, u'   <a href="http://twitter.com/username">@username</a>')
+        self.assertEqual(result.users, [u'username'])
+        self.assertEqual(result.reply, u'username')
+    
+    def test_username_reply_full(self):
+        result = self.parser.parse(u'　@username')
+        self.assertEqual(result.html, u'　<a href="http://twitter.com/username">@username</a>')
+        self.assertEqual(result.users, [u'username'])
+        self.assertEqual(result.reply, u'username')
 
+    def test_username_non_reply(self):
+        result = self.parser.parse(u'test @username')
+        self.assertEqual(result.html, u'test <a href="http://twitter.com/username">@username</a>')
+        self.assertEqual(result.users, [u'username'])
+        self.assertEqual(result.reply, None)
+
+
+# Test it!
 if __name__ == '__main__':
     unittest.main()
 
