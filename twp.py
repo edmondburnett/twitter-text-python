@@ -173,7 +173,7 @@ class Parser:
     def _parse_lists(self, match):
         """Parse lists."""
         
-        # Don't parse lists here
+        # Don't parse usernames here
         if match.group(4) is None:
             return match.group(0)
         
