@@ -13,7 +13,6 @@
 #  You should have received a copy of the GNU General Public License along with
 #  twp. If not, see <http://www.gnu.org/licenses/>.
 
-# TODO add support for lists
 # TODO create a setup.py
 
 
@@ -31,7 +30,7 @@ SPACES = ur'[\u0020\u00A0\u1680\u180E\u2002\u2003\u2004\u2005\u2006\u2007' \
 
 # Users
 USERNAME_REGEX = re.compile(ur'\B' + AT_SIGNS \
-                 + ur'([a-z0-9_]{1,20})', re.IGNORECASE)
+                 + ur'([a-z0-9_]{1,20})(/[a-z][a-z0-9\\x80-\\xFF-]{0,79})?', re.IGNORECASE)
 
 REPLY_REGEX = re.compile(ur'^(?:' + SPACES + ur')*' + AT_SIGNS \
               + ur'([a-z0-9_]{1,20}).*', re.IGNORECASE);
@@ -81,6 +80,10 @@ class ParseResult:
         Note: It's generally better to rely on the Tweet JSON/XML in order to 
         find out if it's a reply or not.
         
+    - lists
+        A list containing all the valid lists in the Tweet.
+        Each list item is a tuple in the format (username, listname).
+        
     - tags
         A list containing all the valid tags in theTweet.
     
@@ -91,9 +94,10 @@ class ParseResult:
     
     """
     
-    def __init__(self, urls, users, reply, tags, html):
+    def __init__(self, urls, users, reply, lists, tags, html):
         self.urls = urls
         self.users = users
+        self.lists = lists
         self.reply = reply
         self.tags = tags
         self.html = html
@@ -111,18 +115,20 @@ class Parser:
         # Reset
         self._urls = []
         self._users = []
+        self._lists = []
         self._tags = []
         
         # Filter
         html = URL_REGEX.sub(self._parse_urls, text)
         html = USERNAME_REGEX.sub(self._parse_users, html)
+        html = LIST_REGEX.sub(self._parse_lists, html)
         html = HASHTAG_REGEX.sub(self._parse_tags, html)
         
         # Reply?
         reply = REPLY_REGEX.match(text)
         self._reply = reply.groups(0)[0] if reply is not None else None        
-        return ParseResult(self._urls, self._users,
-                           self._reply, self._tags, html)
+        return ParseResult(self._urls, self._users, self._reply,
+                           self._lists, self._tags, html)
     
     
     # Internal parser stuff ----------------------------------------------------
@@ -155,9 +161,25 @@ class Parser:
     def _parse_users(self, match):
         """Parse usernames."""
         
+        # Don't parse lists here
+        if match.group(2) is not None:
+            return match.group(0)
+        
         mat = match.group(0)
         self._users.append(mat[1:])
         return self.format_username(mat[0:1], mat[1:])
+    
+    def _parse_lists(self, match):
+        """Parse lists."""
+        
+        # Don't parse lists here
+        if match.group(4) is None:
+            return match.group(0)
+        
+        pre, at_char, user, list_name = match.groups()
+        list_name = list_name[1:]
+        self._lists.append((user, list_name))
+        return '%s%s' % (pre, self.format_list(at_char, user, list_name))
     
     def _parse_tags(self, match):
         """Parse hashtags."""
@@ -200,6 +222,11 @@ class Parser:
         """Return formatted HTML for a username."""
         return '<a href="http://twitter.com/%s">%s%s</a>' \
                % (user, at_char, user)
+    
+    def format_list(self, at_char, user, list_name):
+        """Return formatted HTML for a list."""
+        return '<a href="http://twitter.com/%s/%s">%s%s/%s</a>' \
+               % (user, list_name, at_char, user, list_name)
     
     def format_url(self, url, text):
         """Return formatted HTML for a url."""

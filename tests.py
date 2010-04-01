@@ -414,6 +414,55 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'test <a href="http://twitter.com/username">@username</a>')
         self.assertEqual(result.users, [u'username'])
         self.assertEqual(result.reply, None)
+    
+    
+    # List tests ---------------------------------------------------------------
+    # --------------------------------------------------------------------------
+    def test_list_preceeded(self):
+        result = self.parser.parse(u'text @username/list')
+        self.assertEqual(result.html, u'text <a href="http://twitter.com/username/list">@username/list</a>')
+        self.assertEqual(result.lists, [(u'username', u'list')])
+    
+    def test_list_beginning(self):
+        result = self.parser.parse(u'@username/list')
+        self.assertEqual(result.html, u'<a href="http://twitter.com/username/list">@username/list</a>')
+        self.assertEqual(result.lists, [(u'username', u'list')])
+    
+    def test_list_preceeded_punctuation(self):
+        result = self.parser.parse(u'.@username/list')
+        self.assertEqual(result.html, u'.<a href="http://twitter.com/username/list">@username/list</a>')
+        self.assertEqual(result.lists, [(u'username', u'list')])
+    
+    def test_list_followed_punctuation(self):
+        result = self.parser.parse(u'@username/list&^$%^')
+        self.assertEqual(result.html, u'<a href="http://twitter.com/username/list">@username/list</a>&^$%^')
+        self.assertEqual(result.lists, [(u'username', u'list')])
+    
+    def test_list_not_slash_space(self):
+        result = self.parser.parse(u'@username/ list')
+        self.assertEqual(result.html, u'<a href="http://twitter.com/username">@username</a>/ list')
+        self.assertEqual(result.users, [u'username'])
+        self.assertEqual(result.lists, [])
+    
+    def test_list_beginning(self):
+        result = self.parser.parse(u'@username/list')
+        self.assertEqual(result.html, u'<a href="http://twitter.com/username/list">@username/list</a>')
+        self.assertEqual(result.lists, [(u'username', u'list')])
+        
+    def test_list_not_empty_username(self):
+        result = self.parser.parse(u'text @/list')
+        self.assertEqual(result.html, u'text @/list')
+        self.assertEqual(result.lists, [])
+  
+    def test_list_not_preceeded_letter(self):
+        result = self.parser.parse(u'meet@the/beach')
+        self.assertEqual(result.html, u'meet@the/beach')
+        self.assertEqual(result.lists, [])
+  
+    def test_list_long_truncate(self):
+        result = self.parser.parse(u'@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890A')
+        self.assertEqual(result.html, u'<a href="http://twitter.com/username/list5678901234567890123456789012345678901234567890123456789012345678901234567890">@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890</a>A')
+        self.assertEqual(result.lists, [(u'username', u'list5678901234567890123456789012345678901234567890123456789012345678901234567890')])
 
 
 # Test it!

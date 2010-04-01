@@ -31,12 +31,6 @@ Usage::
 If you need different HTML output just subclass and override the ``format_*`` methods.
 
 
-Todo
-----
-
-- Add support for lists.
-
-
 Contributing
 ------------
 
