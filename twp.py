@@ -29,7 +29,7 @@ SPACES = ur'[\u0020\u00A0\u1680\u180E\u2002-\u202F\u205F\u2060\u3000]'
 
 # Users
 USERNAME_REGEX = re.compile(ur'\B' + AT_SIGNS \
-                 + ur'([a-z0-9_]{1,20})(/[a-z][a-z0-9\\x80-\\xFF-]{0,79})?',
+                 + ur'([a-z0-9_]{1,20})(/[a-z][a-z0-9\x80-\xFF-]{0,79})?',
                  re.IGNORECASE)
 
 REPLY_REGEX = re.compile(ur'^(?:' + SPACES + ur')*' + AT_SIGNS \
@@ -41,7 +41,7 @@ HASHTAG_REGEX = re.compile(HASHTAG_EXP, re.IGNORECASE)
 
 # Lists
 LIST_CHARS = ur'([^a-z0-9_]|^)(' + AT_SIGNS \
-             + ur'+)([a-z0-9_]{1,20})(/[a-z][a-z0-9\\x80-\\xFF-]{0,79})?'
+             + ur'+)([a-z0-9_]{1,20})(/[a-z][a-z0-9\x80-\xFF-]{0,79})?'
 
 LIST_REGEX = re.compile(LIST_CHARS, re.IGNORECASE)
 
