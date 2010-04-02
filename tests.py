@@ -463,6 +463,11 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890A')
         self.assertEqual(result.html, u'<a href="http://twitter.com/username/list5678901234567890123456789012345678901234567890123456789012345678901234567890">@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890</a>A')
         self.assertEqual(result.lists, [(u'username', u'list5678901234567890123456789012345678901234567890123456789012345678901234567890')])
+    
+    def test_list_with_dash(self):
+        result = self.parser.parse(u'text @username/list-foo')
+        self.assertEqual(result.html, u'text <a href="http://twitter.com/username/list-foo">@username/list-foo</a>')
+        self.assertEqual(result.lists, [(u'username', u'list-foo')])
 
 
 # Test it!
