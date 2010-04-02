@@ -25,8 +25,7 @@ import urllib
 # <http://github.com/mzsanford/twitter-text-java>
 AT_SIGNS = ur'[@\uff20]'
 UTF_CHARS = ur'a-z0-9_\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u00ff'
-SPACES = ur'[\u0020\u00A0\u1680\u180E\u2002\u2003\u2004\u2005\u2006\u2007' \
-            + ur'\u2008\u2009\u200A\u200B\u200C\u200D\u202F\u205F\u2060\u3000]'
+SPACES = ur'[\u0020\u00A0\u1680\u180E\u2002-\u202F\u205F\u2060\u3000]'
 
 # Users
 USERNAME_REGEX = re.compile(ur'\B' + AT_SIGNS \
@@ -110,8 +109,10 @@ class Parser:
     def __init__(self, max_url_length=30):
         self._max_url_length = max_url_length
     
-    def parse(self, text):
+    def parse(self, text, html=True):
         """Parse the text and return a ParseResult instance."""
+        
+        self._html = html
         
         # Reset
         self._urls = []
@@ -119,15 +120,29 @@ class Parser:
         self._lists = []
         self._tags = []
         
-        # Filter
+        # Reply?
+        reply = REPLY_REGEX.match(text)
+        self._reply = reply.groups(0)[0] if reply is not None else None
+        
+        return self._parse_html(text) if html else self._parse_text(text)
+    
+    def _parse_text(self, text):
+        """Parse a Tweet without generating HTML."""
+        URL_REGEX.sub(self._parse_urls, text)
+        USERNAME_REGEX.sub(self._parse_users, text)
+        LIST_REGEX.sub(self._parse_lists, text)
+        HASHTAG_REGEX.sub(self._parse_tags, text)
+        
+        return ParseResult(self._urls, self._users, self._reply,
+                           self._lists, self._tags, None)
+    
+    def _parse_html(self, text):
+        """Parse a Tweet and generate HTML."""
         html = URL_REGEX.sub(self._parse_urls, text)
         html = USERNAME_REGEX.sub(self._parse_users, html)
         html = LIST_REGEX.sub(self._parse_lists, html)
         html = HASHTAG_REGEX.sub(self._parse_tags, html)
         
-        # Reply?
-        reply = REPLY_REGEX.match(text)
-        self._reply = reply.groups(0)[0] if reply is not None else None        
         return ParseResult(self._urls, self._users, self._reply,
                            self._lists, self._tags, html)
     
@@ -156,8 +171,10 @@ class Parser:
             full_url = 'http://%s' % url
         
         self._urls.append(url)
-        return '%s%s' % (pre, self.format_url(full_url,
-                                              self._shorten_url(escape(url))))
+        
+        if self._html:
+            return '%s%s' % (pre, self.format_url(full_url,
+                                       self._shorten_url(escape(url))))
     
     def _parse_users(self, match):
         """Parse usernames."""
@@ -168,7 +185,9 @@ class Parser:
         
         mat = match.group(0)
         self._users.append(mat[1:])
-        return self.format_username(mat[0:1], mat[1:])
+        
+        if self._html:
+            return self.format_username(mat[0:1], mat[1:])
     
     def _parse_lists(self, match):
         """Parse lists."""
@@ -180,7 +199,9 @@ class Parser:
         pre, at_char, user, list_name = match.groups()
         list_name = list_name[1:]
         self._lists.append((user, list_name))
-        return '%s%s' % (pre, self.format_list(at_char, user, list_name))
+        
+        if self._html:
+            return '%s%s' % (pre, self.format_list(at_char, user, list_name))
     
     def _parse_tags(self, match):
         """Parse hashtags."""
@@ -197,7 +218,9 @@ class Parser:
         
         pre, text = mat[:pos], mat[pos + 1:]
         self._tags.append(text)
-        return '%s%s' % (pre, self.format_tag(tag, text))
+        
+        if self._html:
+            return '%s%s' % (pre, self.format_tag(tag, text))
     
     def _shorten_url(self, text):
         """Shorten a URL and make sure to not cut of html entities."""
