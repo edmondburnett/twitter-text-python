@@ -448,17 +448,17 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'@username/list')
         self.assertEqual(result.html, u'<a href="http://twitter.com/username/list">@username/list</a>')
         self.assertEqual(result.lists, [(u'username', u'list')])
-        
+    
     def test_list_not_empty_username(self):
         result = self.parser.parse(u'text @/list')
         self.assertEqual(result.html, u'text @/list')
         self.assertEqual(result.lists, [])
-  
+    
     def test_list_not_preceeded_letter(self):
         result = self.parser.parse(u'meet@the/beach')
         self.assertEqual(result.html, u'meet@the/beach')
         self.assertEqual(result.lists, [])
-  
+    
     def test_list_long_truncate(self):
         result = self.parser.parse(u'@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890A')
         self.assertEqual(result.html, u'<a href="http://twitter.com/username/list5678901234567890123456789012345678901234567890123456789012345678901234567890">@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890</a>A')
