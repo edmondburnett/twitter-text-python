@@ -1,20 +1,19 @@
-twp - TWitter(Text)Python
-=========================
+twitter-text-python
+===================
 
-**twp** is a Tweet parser and formatter for Python.
+**twitter-text-python** is a Tweet parser and formatter for Python.
 
-It is based on the Java Implementation_ of the Twitter Text Library.
-The unittests are nearly a exact copy of the ones for the Java Library_.
+It is based on twitter-text-java_ and passes all the unittests of 
+twitter-text-conformance_ plus some additional ones.
 
-.. _Implementation: http://github.com/mzsanford/twitter-text-java
-.. _Library: http://github.com/mzsanford/twitter-text-conformance/blob/master/autolink.yml
-.. _Atarashii: http://github.com/BonsaiDen/Atarashii/
+.. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
+.. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance/blob/master/autolink.yml
 
 Usage::
 
-    >>> import twp
-    >>> p = twp.Parser()
-    >>> result = p.parse("@BonsaiDen Hey that's a great Tweet Parser! #twp")
+    >>> import ttp
+    >>> p = ttp.Parser()
+    >>> result = p.parse("@BonsaiDen Hey that's a great Tweet parser! #twp")
     >>> result.reply
     'BonsaiDen'
     >>> result.users
@@ -38,23 +37,23 @@ The source is available on GitHub_, to
 contribute to the project, fork it on GitHub and send a pull request.
 Everyone is welcome to make improvements to **twp**!
 
-.. _GitHub: http://github.com/BonsaiDen/twp
+.. _GitHub: http://github.com/BonsaiDen/twitter-text-python
 
 License
 =======
 
 Copyright (c) 2010 Ivo Wetzel
 
-**twp** is free software: you can redistribute it and/or 
+**twitter-text-python** is free software: you can redistribute it and/or 
 modify it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-**twp** is distributed in the hope that it will be useful,
+**twitter-text-python** is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-**twp**. If not, see <http://www.gnu.org/licenses/>.
+**twitter-text-python**. If not, see <http://www.gnu.org/licenses/>.
 

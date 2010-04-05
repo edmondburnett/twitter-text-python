@@ -18,12 +18,12 @@
 # twp - Unittests --------------------------------------------------------------
 # ------------------------------------------------------------------------------
 import unittest
-import twp
+import ttp
 
 
 class TWPTests(unittest.TestCase):
     def setUp(self):
-        self.parser = twp.Parser()
+        self.parser = ttp.Parser()
     
     
     # General Tests ------------------------------------------------------------
