@@ -7,7 +7,7 @@ It is based on twitter-text-java_ and passes all the unittests of
 twitter-text-conformance_ plus some additional ones.
 
 .. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
-.. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance/blob/master/autolink.yml
+.. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance
 
 Usage::
 
