@@ -61,7 +61,7 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'Check out http://search.twitter.com/search?q=avro&lang=en')
         self.assertEqual(result.html, u'Check out <a href="http://search.twitter.com/search?q=avro&amp;lang=en">http://search.twitter.com/s...</a>')
         self.assertEqual(result.urls, [u'http://search.twitter.com/search?q=avro&lang=en'])
-        
+    
     def test_url_amp_break(self):
         result = self.parser.parse(u'Check out http://twitter.com/te?foo&invalid=True')
         self.assertEqual(result.html, u'Check out <a href="http://twitter.com/te?foo&amp;invalid=True">http://twitter.com/te?foo...</a>')
@@ -160,7 +160,7 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text:http://example.com')
         self.assertEqual(result.html, u'text:<a href="http://example.com">http://example.com</a>')
         self.assertEqual(result.urls, [u'http://example.com'])
-            
+    
     def test_not_url_preceeded_equals(self):
         result = self.parser.parse(u'text =http://example.com')
         self.assertEqual(result.html, u'text =http://example.com')
@@ -176,19 +176,19 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text !http://example.com')
         self.assertEqual(result.html, u'text !http://example.com')
         self.assertEqual(result.urls, [])
-
+    
     
     # URL not tests ------------------------------------------------------------
     def test_not_url_dotdotdot(self):
         result = self.parser.parse(u'Is www...foo a valid URL?')
         self.assertEqual(result.html, u'Is www...foo a valid URL?')
         self.assertEqual(result.urls, [])
-        
+    
     def test_not_url_dash(self):
         result = self.parser.parse(u'Is www.-foo.com a valid URL?')
         self.assertEqual(result.html, u'Is www.-foo.com a valid URL?')
         self.assertEqual(result.urls, [])
-        
+    
     def test_all_not_break_url_at(self):
         result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/4382024406')
         self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/4382024406">http://www.flickr.com/photo...</a>')
@@ -200,7 +200,7 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/4382024406')
         self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/4382024406">http://www.flickr.com/photo...</a>')
         self.assertEqual(result.urls, [u'http://www.flickr.com/photos/29674651@N00/4382024406'])
-        
+    
     def test_url_at_non_numeric(self):
         result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/foobar')
         self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/foobar">http://www.flickr.com/photo...</a>')
@@ -254,7 +254,7 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'badly formatted http://foo_bar.com')
         self.assertEqual(result.urls, [])
     
-
+    
     # Hashtag tests ------------------------------------------------------------
     # --------------------------------------------------------------------------
     def test_hashtag_followed_full_whitespace(self):
@@ -266,12 +266,12 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'＃hashtag')
         self.assertEqual(result.html, u'<a href="http://search.twitter.com/search?q=%23hashtag">＃hashtag</a>')
         self.assertEqual(result.tags, [u'hashtag'])
-
+    
     def test_hashtag_preceeded_full_whitespace(self):
         result = self.parser.parse(u'text　#hashtag')
         self.assertEqual(result.html, u'text　<a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>')
         self.assertEqual(result.tags, [u'hashtag'])
-
+    
     def test_hashtag_number(self):
         result = self.parser.parse(u'text #1tag')
         self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%231tag">#1tag</a>')
@@ -291,7 +291,7 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text.#hashtag')
         self.assertEqual(result.html, u'text.<a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>')
         self.assertEqual(result.tags, [u'hashtag'])
-
+    
     def test_hashtag_trailing(self):
         result = self.parser.parse(u'text #hashtag')
         self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>')
@@ -331,7 +331,7 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text #hash_tag')
         self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hash_tag">#hash_tag</a>')
         self.assertEqual(result.tags, [u'hash_tag'])
-
+    
     
     # Username tests -----------------------------------------------------------
     # --------------------------------------------------------------------------
@@ -354,11 +354,11 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'@usernameの')
         self.assertEqual(result.html, u'<a href="http://twitter.com/username">@username</a>の')
         self.assertEqual(result.users, [u'username'])
-        
+    
     def test_username_surrounded_japanese(self):
         result = self.parser.parse(u'あ@usernameの')
         self.assertEqual(result.html, u'あ<a href="http://twitter.com/username">@username</a>の')
-        self.assertEqual(result.users, [u'username'])    
+        self.assertEqual(result.users, [u'username'])
     
     def test_username_followed_punctuation(self):
         result = self.parser.parse(u'@username&^$%^')
@@ -408,7 +408,7 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'　<a href="http://twitter.com/username">@username</a>')
         self.assertEqual(result.users, [u'username'])
         self.assertEqual(result.reply, u'username')
-
+    
     def test_username_non_reply(self):
         result = self.parser.parse(u'test @username')
         self.assertEqual(result.html, u'test <a href="http://twitter.com/username">@username</a>')
