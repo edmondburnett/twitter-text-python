@@ -61,6 +61,10 @@ URL_REGEX = re.compile('((%s)((https?://|www\\.)(%s)(\/%s*%s?)?(\?%s*%s)?))'
                        re.IGNORECASE)
 
 
+# Registered IANA one letter domains
+IANA_ONE_LETTER_DOMAINS = ('x.com', 'x.org', 'z.com', 'q.net', 'q.com', 'i.net')
+
+
 class ParseResult(object):
     '''A class containing the results of a parsed Tweet.
     
@@ -145,8 +149,16 @@ class Parser(object):
         
         # Fix a bug in the regex concerning www...com and www.-foo.com domains
         # TODO fix this in the regex instead of working around it here
-        if match.group(5)[0] in '.-':
+        domain = match.group(5)
+        if domain[0] in '.-':
             return mat
+        
+        # Only allow IANA one letter domains that are actually registered
+        if len(domain) == 5 \
+           and domain[-4:].lower() in ('.com', '.org', '.net') \
+           and not domain.lower() in IANA_ONE_LETTER_DOMAINS:
+                
+                return mat
         
         # Check for urls without http(s)
         pos = mat.find('http')

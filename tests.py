@@ -97,6 +97,82 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'いまなにしてる<a href="http://example.com">http://example.com</a>いまなにしてる')
         self.assertEqual(result.urls, [u'http://example.com'])
     
+    def test_url_lots_of_punctuation(self):
+        result = self.parser.parse(u'text http://xo.com/~matthew+%-,.;x')
+        self.assertEqual(result.html, u'text <a href="http://xo.com/~matthew+%-,.;x">http://xo.com/~matthew+%-,.;x</a>')
+        self.assertEqual(result.urls, [u'http://xo.com/~matthew+%-,.;x'])
+    
+    def test_url_question_numbers(self):
+        result = self.parser.parse(u'text http://example.com/?77e8fd')
+        self.assertEqual(result.html, u'text <a href="http://example.com/?77e8fd">http://example.com/?77e8fd</a>')
+        self.assertEqual(result.urls, [u'http://example.com/?77e8fd'])
+    
+    def test_url_one_letter_other(self):
+        result = self.parser.parse(u'text http://u.nu/')
+        self.assertEqual(result.html, u'text <a href="http://u.nu/">http://u.nu/</a>')
+        self.assertEqual(result.urls, [u'http://u.nu/'])
+        
+        result = self.parser.parse(u'text http://u.tv/')
+        self.assertEqual(result.html, u'text <a href="http://u.tv/">http://u.tv/</a>')
+        self.assertEqual(result.urls, [u'http://u.tv/'])
+    
+    def test_url_one_letter_iana(self):
+        result = self.parser.parse(u'text http://x.com/')
+        self.assertEqual(result.html, u'text <a href="http://x.com/">http://x.com/</a>')
+        self.assertEqual(result.urls, [u'http://x.com/'])
+        
+        result = self.parser.parse(u'text http://Q.com/')
+        self.assertEqual(result.html, u'text <a href="http://Q.com/">http://Q.com/</a>')
+        self.assertEqual(result.urls, [u'http://Q.com/'])
+        
+        result = self.parser.parse(u'text http://z.com/')
+        self.assertEqual(result.html, u'text <a href="http://z.com/">http://z.com/</a>')
+        self.assertEqual(result.urls, [u'http://z.com/'])
+        
+        result = self.parser.parse(u'text http://i.net/')
+        self.assertEqual(result.html, u'text <a href="http://i.net/">http://i.net/</a>')
+        self.assertEqual(result.urls, [u'http://i.net/'])
+        
+        result = self.parser.parse(u'text http://q.net/')
+        self.assertEqual(result.html, u'text <a href="http://q.net/">http://q.net/</a>')
+        self.assertEqual(result.urls, [u'http://q.net/'])
+        
+        result = self.parser.parse(u'text http://X.org/')
+        self.assertEqual(result.html, u'text <a href="http://X.org/">http://X.org/</a>')
+        self.assertEqual(result.urls, [u'http://X.org/'])
+    
+    
+    # URL not tests ------------------------------------------------------------
+    def test_not_url_dotdotdot(self):
+        result = self.parser.parse(u'Is www...foo a valid URL?')
+        self.assertEqual(result.html, u'Is www...foo a valid URL?')
+        self.assertEqual(result.urls, [])
+    
+    def test_not_url_dash(self):
+        result = self.parser.parse(u'Is www.-foo.com a valid URL?')
+        self.assertEqual(result.html, u'Is www.-foo.com a valid URL?')
+        self.assertEqual(result.urls, [])
+    
+    def test_not_url_no_tld(self):
+        result = self.parser.parse(u'Is http://no-tld a valid URL?')
+        self.assertEqual(result.html, u'Is http://no-tld a valid URL?')
+        self.assertEqual(result.urls, [])
+    
+    def test_not_url_tld_too_short(self):
+        result = self.parser.parse(u'Is http://tld-too-short.x a valid URL?')
+        self.assertEqual(result.html, u'Is http://tld-too-short.x a valid URL?')
+        self.assertEqual(result.urls, [])
+    
+    def test_all_not_break_url_at(self):
+        result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/4382024406')
+        self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/4382024406">http://www.flickr.com/photo...</a>')
+        self.assertEqual(result.urls, [u'http://www.flickr.com/photos/29674651@N00/4382024406'])
+    
+    def test_not_url_one_letter_iana(self):
+        result = self.parser.parse(u'text http://a.com/ http://a.net/ http://a.org/')
+        self.assertEqual(result.html, u'text http://a.com/ http://a.net/ http://a.org/')
+        self.assertEqual(result.urls, [])
+    
     
     # URL followed Tests -------------------------------------------------------
     def test_url_followed_question(self):
@@ -176,23 +252,6 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text !http://example.com')
         self.assertEqual(result.html, u'text !http://example.com')
         self.assertEqual(result.urls, [])
-    
-    
-    # URL not tests ------------------------------------------------------------
-    def test_not_url_dotdotdot(self):
-        result = self.parser.parse(u'Is www...foo a valid URL?')
-        self.assertEqual(result.html, u'Is www...foo a valid URL?')
-        self.assertEqual(result.urls, [])
-    
-    def test_not_url_dash(self):
-        result = self.parser.parse(u'Is www.-foo.com a valid URL?')
-        self.assertEqual(result.html, u'Is www.-foo.com a valid URL?')
-        self.assertEqual(result.urls, [])
-    
-    def test_all_not_break_url_at(self):
-        result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/4382024406')
-        self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/4382024406">http://www.flickr.com/photo...</a>')
-        self.assertEqual(result.urls, [u'http://www.flickr.com/photos/29674651@N00/4382024406'])
     
     
     # URL numeric tests --------------------------------------------------------
