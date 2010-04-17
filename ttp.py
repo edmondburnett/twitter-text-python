@@ -157,8 +157,8 @@ class Parser(object):
         if len(domain) == 5 \
            and domain[-4:].lower() in ('.com', '.org', '.net') \
            and not domain.lower() in IANA_ONE_LETTER_DOMAINS:
-                
-                return mat
+            
+            return mat
         
         # Check for urls without http(s)
         pos = mat.find('http')
