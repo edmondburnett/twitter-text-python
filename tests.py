@@ -141,6 +141,11 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'text <a href="http://X.org/">http://X.org/</a>')
         self.assertEqual(result.urls, [u'http://X.org/'])
     
+    def test_url_long_hypens(self):
+        result = self.parser.parse(u'text http://word-and-a-number-8-ftw.domain.tld/')
+        self.assertEqual(result.html, u'text <a href="http://word-and-a-number-8-ftw.domain.tld/">http://word-and-a-number-8-...</a>')
+        self.assertEqual(result.urls, [u'http://word-and-a-number-8-ftw.domain.tld/'])
+    
     
     # URL not tests ------------------------------------------------------------
     def test_not_url_dotdotdot(self):
@@ -229,6 +234,11 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text http://example.com;')
         self.assertEqual(result.html, u'text <a href="http://example.com">http://example.com</a>;')
         self.assertEqual(result.urls, [u'http://example.com'])
+    
+    def test_url_followed_hypen(self):
+        result = self.parser.parse(u'text http://domain.tld-that-you-should-have-put-a-space-after')
+        self.assertEqual(result.html, u'text <a href="http://domain.tld">http://domain.tld</a>-that-you-should-have-put-a-space-after')
+        self.assertEqual(result.urls, [u'http://domain.tld'])
     
     
     # URL preceeded Tests -------------------------------------------------------
