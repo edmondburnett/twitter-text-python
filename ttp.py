@@ -58,7 +58,7 @@ QUERY_ENDING_CHARS = '[a-z0-9_&=#]'
 URL_REGEX = re.compile('((%s)((https?://|www\\.)(%s)(\/%s*%s?)?(\?%s*%s)?))'
                        % (PRE_CHARS, DOMAIN_CHARS, PATH_CHARS,
                           PATH_ENDING_CHARS, QUERY_CHARS, QUERY_ENDING_CHARS),
-                       re.IGNORECASE)
+                          re.IGNORECASE)
 
 
 # Registered IANA one letter domains
@@ -227,7 +227,7 @@ class Parser(object):
     def _shorten_url(self, text):
         '''Shorten a URL and make sure to not cut of html entities.'''
         
-        if len(text) > self._max_url_length:
+        if len(text) > self._max_url_length and self._max_url_length != -1:
             text = text[0:self._max_url_length - 3]
             amp = text.rfind('&')
             close = text.rfind(';')
