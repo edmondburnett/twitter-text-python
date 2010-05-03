@@ -57,6 +57,16 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'text (<a href="http://example.com">http://example.com</a>)')
         self.assertEqual(result.urls, [u'http://example.com'])
     
+    def test_url_underscore(self):
+        result = self.parser.parse(u'text http://example.com/test/foo_123.jpg')
+        self.assertEqual(result.html, u'text <a href="http://example.com/test/foo_123.jpg">http://example.com/test/foo...</a>')
+        self.assertEqual(result.urls, [u'http://example.com/test/foo_123.jpg'])
+    
+    def test_url_underscore_dot(self):
+        result = self.parser.parse(u'text http://example.com/test/bla.net_foo_123.jpg')
+        self.assertEqual(result.html, u'text <a href="http://example.com/test/bla.net_foo_123.jpg">http://example.com/test/bla...</a>')
+        self.assertEqual(result.urls, [u'http://example.com/test/bla.net_foo_123.jpg'])
+    
     def test_url_amp_lang_equals(self):
         result = self.parser.parse(u'Check out http://search.twitter.com/search?q=avro&lang=en')
         self.assertEqual(result.html, u'Check out <a href="http://search.twitter.com/search?q=avro&amp;lang=en">http://search.twitter.com/s...</a>')
