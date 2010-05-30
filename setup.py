@@ -7,7 +7,7 @@ setup(
     long_description=open('README.rst').read(),
     author='Ivo Wetzel',
     author_email='',
-    url='http://github.com/abuchanan/twitter-text-python',
+    url='http://github.com/BonsaiDen/twitter-text-python',
     license='GPL',
     packages=['ttp'],
     include_package_data=True,
