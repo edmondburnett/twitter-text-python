@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='twitter-text-python',
@@ -9,7 +9,7 @@ setup(
     author_email='',
     url='http://github.com/BonsaiDen/twitter-text-python',
     license='GPL',
-    packages=['ttp'],
+    packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires=[],
