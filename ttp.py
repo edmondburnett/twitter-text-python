@@ -97,11 +97,11 @@ class ParseResult(object):
     '''
     
     def __init__(self, urls, users, reply, lists, tags, html):
-        self.urls = urls
-        self.users = users
-        self.lists = lists
-        self.reply = reply
-        self.tags = tags
+        self.urls = list(set(urls)) if urls else []  #fixes dups
+        self.users = list(set(users)) if users else []
+        self.lists = list(set(lists)) if lists else []
+        self.reply = list(set(reply)) if reply else []
+        self.tags = list(set(tags)) if tags else []
         self.html = html
 
 
