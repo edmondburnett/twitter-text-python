@@ -107,8 +107,9 @@ class ParseResult(object):
 class Parser(object):
     '''A Tweet Parser'''
 
-    def __init__(self, max_url_length=30):
+    def __init__(self, max_url_length=30, include_spans = False):
         self._max_url_length = max_url_length
+        self._include_spans = include_spans
 
     def parse(self, text, html=True):
         '''Parse the text and return a ParseResult instance.'''
@@ -171,7 +172,10 @@ class Parser(object):
             pre, url = mat[:pos], mat[pos:]
             full_url = 'http://%s' % url
 
-        self._urls.append(url)
+        if self._include_spans:
+            self._urls.append((url, match.span(0)))
+        else:
+            self._urls.append(url)
 
         if self._html:
             return '%s%s' % (pre, self.format_url(full_url,
@@ -185,7 +189,10 @@ class Parser(object):
             return match.group(0)
 
         mat = match.group(0)
-        self._users.append(mat[1:])
+        if self._include_spans:
+            self._users.append((mat[1:], match.span(0)))
+        else:
+            self._users.append(mat[1:])
 
         if self._html:
             return self.format_username(mat[0:1], mat[1:])
@@ -199,7 +206,10 @@ class Parser(object):
 
         pre, at_char, user, list_name = match.groups()
         list_name = list_name[1:]
-        self._lists.append((user, list_name))
+        if self._include_spans:
+            self._lists.append((user, list_name, match.span(0)))
+        else:
+            self._lists.append((user, list_name))
 
         if self._html:
             return '%s%s' % (pre, self.format_list(at_char, user, list_name))
@@ -218,7 +228,10 @@ class Parser(object):
                 break
 
         pre, text = mat[:pos], mat[pos + 1:]
-        self._tags.append(text)
+        if self._include_spans:
+            self._tags.append((text, match.span(0)))
+        else:
+            self._tags.append(text)
 
         if self._html:
             return '%s%s' % (pre, self.format_tag(tag, text))
