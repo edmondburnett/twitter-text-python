@@ -549,7 +549,33 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.lists, [(u'username', u'list-foo')])
 
 
+class TWPTestsWithSpans(unittest.TestCase):
+    """Test ttp with re spans to extract character co-ords of matches"""
+    def setUp(self):
+        self.parser = ttp.Parser(include_spans = True)
+
+    def test_spans_in_tweets(self):
+        """Test some coca-cola tweets taken from twitter with spans"""
+        result = self.parser.parse(u'Coca-Cola Hits 50 Million Facebook Likes http://bit.ly/QlKOc7')
+        self.assertEqual(result.urls, [('http://bit.ly/QlKOc7', (40, 61))])
+
+        result = self.parser.parse(u' #ABillionReasonsToBelieveInAfrica ARISE MAG.FASHION WEEK NY! Tsemaye B,Maki Oh,Tiffany Amber, Ozwald.Showin NY reasons2beliv @CocaCola_NG')
+        self.assertEqual(result.urls, [])
+        self.assertEqual(result.tags, [(u'ABillionReasonsToBelieveInAfrica', (0, 34))])
+        self.assertEqual(result.users, [(u'CocaCola_NG', (126, 138))])
+
+        result = self.parser.parse(u'Follow @CokeZero & Retweet for a chance to win @EASPORTS @EANCAAFootball 13 #GameOn #ad Rules: http://bit.ly/EANCAA')
+        self.assertEqual(result.urls, [(u'http://bit.ly/EANCAA', (94, 115))])
+        self.assertEqual(result.users, [(u'CokeZero', (7, 16)), (u'EASPORTS', (47, 56)), (u'EANCAAFootball', (57, 72))])
+        self.assertEqual(result.tags, [(u'GameOn', (207, 215)), (u'ad', (215, 219))])
+
+
 # Test it!
 if __name__ == '__main__':
-    unittest.main()
+    #unittest.main() # only seems to run 1 class?
 
+    verbosity = 0 # set to 2 for verbose output
+    suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpans)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TWPTests)
+    unittest.TextTestRunner(verbosity=verbosity).run(suite)
