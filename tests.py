@@ -572,10 +572,10 @@ class TWPTestsWithSpans(unittest.TestCase):
 
 # Test it!
 if __name__ == '__main__':
-    #unittest.main() # only seems to run 1 class?
+    unittest.main() # only seems to run 1 class?
 
-    verbosity = 0 # set to 2 for verbose output
-    suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpans)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TWPTests)
-    unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    #verbosity = 0 # set to 2 for verbose output
+    #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpans)
+    #unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTests)
+    #unittest.TextTestRunner(verbosity=verbosity).run(suite)
