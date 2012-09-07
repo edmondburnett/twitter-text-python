@@ -60,71 +60,70 @@ URL_REGEX = re.compile('((%s)((https?://|www\\.)(%s)(\/%s*%s?)?(\?%s*%s)?))'
                           PATH_ENDING_CHARS, QUERY_CHARS, QUERY_ENDING_CHARS),
                           re.IGNORECASE)
 
-
 # Registered IANA one letter domains
 IANA_ONE_LETTER_DOMAINS = ('x.com', 'x.org', 'z.com', 'q.net', 'q.com', 'i.net')
 
 
 class ParseResult(object):
     '''A class containing the results of a parsed Tweet.
-    
+
     Attributes:
     - urls:
         A list containing all the valid urls in the Tweet.
-    
+
     - users
         A list containing all the valid usernames in the Tweet.
-    
+
     - reply
         A string containing the username this tweet was a reply to.
         This only matches a username at the beginning of the Tweet,
         it may however be preceeded by whitespace.
         Note: It's generally better to rely on the Tweet JSON/XML in order to
         find out if it's a reply or not.
-        
+
     - lists
         A list containing all the valid lists in the Tweet.
         Each list item is a tuple in the format (username, listname).
-        
+
     - tags
         A list containing all the valid tags in theTweet.
-    
+
     - html
         A string containg formatted HTML.
         To change the formatting sublcass twp.Parser and override the format_*
         methods.
-    
+
     '''
-    
+
     def __init__(self, urls, users, reply, lists, tags, html):
-        self.urls = list(set(urls)) if urls else []  #fixes dups
-        self.users = list(set(users)) if users else []
-        self.lists = list(set(lists)) if lists else []
-        self.reply = list(set(reply)) if reply else []
-        self.tags = list(set(tags)) if tags else []
+        self.urls = urls if urls else []
+        self.users = users if users else []
+        self.lists = lists if lists else []
+        self.reply = reply if reply else None
+        self.tags = tags if tags else []
         self.html = html
 
 
 class Parser(object):
     '''A Tweet Parser'''
-    
+
     def __init__(self, max_url_length=30):
         self._max_url_length = max_url_length
-    
+
     def parse(self, text, html=True):
         '''Parse the text and return a ParseResult instance.'''
         self._urls = []
         self._users = []
         self._lists = []
         self._tags = []
-        
+
         reply = REPLY_REGEX.match(text)
         reply = reply.groups(0)[0] if reply is not None else None
-        
+
         parsed_html = self._html(text) if html else self._text(text)
         return ParseResult(self._urls, self._users, reply,
                            self._lists, self._tags, parsed_html)
-    
+
     def _text(self, text):
         '''Parse a Tweet without generating HTML.'''
         URL_REGEX.sub(self._parse_urls, text)
@@ -132,84 +131,84 @@ class Parser(object):
         LIST_REGEX.sub(self._parse_lists, text)
         HASHTAG_REGEX.sub(self._parse_tags, text)
         return None
-    
+
     def _html(self, text):
         '''Parse a Tweet and generate HTML.'''
         html = URL_REGEX.sub(self._parse_urls, text)
         html = USERNAME_REGEX.sub(self._parse_users, html)
         html = LIST_REGEX.sub(self._parse_lists, html)
         return HASHTAG_REGEX.sub(self._parse_tags, html)
-    
-    
+
+
     # Internal parser stuff ----------------------------------------------------
     def _parse_urls(self, match):
         '''Parse URLs.'''
-        
+
         mat = match.group(0)
-        
+
         # Fix a bug in the regex concerning www...com and www.-foo.com domains
         # TODO fix this in the regex instead of working around it here
         domain = match.group(5)
         if domain[0] in '.-':
             return mat
-        
+
         # Only allow IANA one letter domains that are actually registered
         if len(domain) == 5 \
            and domain[-4:].lower() in ('.com', '.org', '.net') \
            and not domain.lower() in IANA_ONE_LETTER_DOMAINS:
-            
+
             return mat
-        
+
         # Check for urls without http(s)
         pos = mat.find('http')
         if pos != -1:
             pre, url = mat[:pos], mat[pos:]
             full_url = url
-        
+
         # Find the www and force http://
         else:
             pos = mat.lower().find('www')
             pre, url = mat[:pos], mat[pos:]
             full_url = 'http://%s' % url
-        
+
         self._urls.append(url)
-        
+
         if self._html:
             return '%s%s' % (pre, self.format_url(full_url,
                                        self._shorten_url(escape(url))))
-    
+
     def _parse_users(self, match):
         '''Parse usernames.'''
-        
+
         # Don't parse lists here
         if match.group(2) is not None:
             return match.group(0)
-        
+
         mat = match.group(0)
         self._users.append(mat[1:])
-        
+
         if self._html:
             return self.format_username(mat[0:1], mat[1:])
-    
+
     def _parse_lists(self, match):
         '''Parse lists.'''
-        
+
         # Don't parse usernames here
         if match.group(4) is None:
             return match.group(0)
-        
+
         pre, at_char, user, list_name = match.groups()
         list_name = list_name[1:]
         self._lists.append((user, list_name))
-        
+
         if self._html:
             return '%s%s' % (pre, self.format_list(at_char, user, list_name))
-    
+
     def _parse_tags(self, match):
         '''Parse hashtags.'''
-        
+
         mat = match.group(0)
-        
+
         # Fix problems with the regex capturing stuff infront of the #
         tag = None
         for i in u'#\uff03':
@@ -217,45 +216,45 @@ class Parser(object):
             if pos != -1:
                 tag = i
                 break
-        
+
         pre, text = mat[:pos], mat[pos + 1:]
         self._tags.append(text)
-        
+
         if self._html:
             return '%s%s' % (pre, self.format_tag(tag, text))
-    
+
     def _shorten_url(self, text):
         '''Shorten a URL and make sure to not cut of html entities.'''
-        
+
         if len(text) > self._max_url_length and self._max_url_length != -1:
             text = text[0:self._max_url_length - 3]
             amp = text.rfind('&')
             close = text.rfind(';')
             if amp != -1 and (close == -1 or close < amp):
                 text = text[0:amp]
-            
+
             return text + '...'
-        
+
         else:
             return text
-    
-    
+
+
     # User defined formatters --------------------------------------------------
     def format_tag(self, tag, text):
         '''Return formatted HTML for a hashtag.'''
         return '<a href="http://search.twitter.com/search?q=%s">%s%s</a>' \
                 % (urllib.quote('#' + text.encode('utf-8')), tag, text)
-    
+
     def format_username(self, at_char, user):
         '''Return formatted HTML for a username.'''
         return '<a href="http://twitter.com/%s">%s%s</a>' \
                % (user, at_char, user)
-    
+
     def format_list(self, at_char, user, list_name):
         '''Return formatted HTML for a list.'''
         return '<a href="http://twitter.com/%s/%s">%s%s/%s</a>' \
                % (user, list_name, at_char, user, list_name)
-    
+
     def format_url(self, url, text):
         '''Return formatted HTML for a url.'''
         return '<a href="%s">%s</a>' % (escape(url), text)
