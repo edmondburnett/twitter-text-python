@@ -28,6 +28,12 @@ class TWPTests(unittest.TestCase):
 
     # General Tests ------------------------------------------------------------
     # --------------------------------------------------------------------------
+    def test_urls(self):
+        """Confirm that # in a URL works along with ,"""
+        result = self.parser.parse(u'big url: http://blah.com:8080/path/to/here?p=1&q=abc,def#posn2 #ahashtag')
+        self.assertEqual(result.urls, [u'http://blah.com:8080/path/to/here?p=1&q=abc,def#posn2'])
+        self.assertEqual(result.tags, [u'ahashtag'])
+
     def test_all_not_allow_amp_without_question(self):
         result = self.parser.parse(u'Check out: http://www.github.com/test&@username')
         self.assertEqual(result.html, u'Check out: <a href="http://www.github.com/test">http://www.github.com/test</a>&<a href="http://twitter.com/username">@username</a>')
