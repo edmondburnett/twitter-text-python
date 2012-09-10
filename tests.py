@@ -184,7 +184,7 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'Is http://tld-too-short.x a valid URL?')
         self.assertEqual(result.urls, [])
 
-    def test_all_not_break_url_at(self):
+    def test_all_not_break_url_at2(self):
         result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/4382024406')
         self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/4382024406">http://www.flickr.com/photo...</a>')
         self.assertEqual(result.urls, [u'http://www.flickr.com/photos/29674651@N00/4382024406'])
@@ -529,7 +529,7 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.users, [u'username'])
         self.assertEqual(result.lists, [])
 
-    def test_list_beginning(self):
+    def test_list_beginning2(self):
         result = self.parser.parse(u'@username/list')
         self.assertEqual(result.html, u'<a href="http://twitter.com/username/list">@username/list</a>')
         self.assertEqual(result.lists, [(u'username', u'list')])
@@ -565,16 +565,19 @@ class TWPTestsWithSpans(unittest.TestCase):
         result = self.parser.parse(u'Coca-Cola Hits 50 Million Facebook Likes http://bit.ly/QlKOc7')
         self.assertEqual(result.urls, [('http://bit.ly/QlKOc7', (40, 61))])
 
-        result = self.parser.parse(u' #ABillionReasonsToBelieveInAfrica ARISE MAG.FASHION WEEK NY! Tsemaye B,Maki Oh,Tiffany Amber, Ozwald.Showin NY reasons2beliv @CocaCola_NG')
+        result = self.parser.parse(u' #ABillionReasonsToBelieveInAfrica ARISE MAG.FASHION WEEK NY! Tsemaye B,Maki Oh,Tiffany Amber, Ozwald.Showin NY reasons2beliv @CocaCola_NG', html=False)
         self.assertEqual(result.urls, [])
         self.assertEqual(result.tags, [(u'ABillionReasonsToBelieveInAfrica', (0, 34))])
         self.assertEqual(result.users, [(u'CocaCola_NG', (126, 138))])
 
-        result = self.parser.parse(u'Follow @CokeZero & Retweet for a chance to win @EASPORTS @EANCAAFootball 13 #GameOn #ad Rules: http://bit.ly/EANCAA')
+        result = self.parser.parse(u'Follow @CokeZero & Retweet for a chance to win @EASPORTS @EANCAAFootball 13 #GameOn #ad Rules: http://bit.ly/EANCAA', html=False)
         self.assertEqual(result.urls, [(u'http://bit.ly/EANCAA', (94, 115))])
         self.assertEqual(result.users, [(u'CokeZero', (7, 16)), (u'EASPORTS', (47, 56)), (u'EANCAAFootball', (57, 72))])
-        self.assertEqual(result.tags, [(u'GameOn', (207, 215)), (u'ad', (215, 219))])
+        self.assertEqual(result.tags, [(u'GameOn', (75, 83)), (u'ad', (83, 87))])
 
+    def test_users_in_tweets(self):
+        result = self.parser.parse(u'Follow @CokeZero & Retweet for a chance to win @EASPORTS @EANCAAFootball 13 #GameOn #ad Rules: http://bit.ly/EANCAA @someone', html=False)
+        self.assertEqual(result.users, [(u'CokeZero', (7, 16)), (u'EASPORTS', (47, 56)), (u'EANCAAFootball', (57, 72)), (u'someone', (116, 124))])
 
 # Test it!
 if __name__ == '__main__':
