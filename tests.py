@@ -563,27 +563,42 @@ class TWPTestsWithSpans(unittest.TestCase):
     def test_spans_in_tweets(self):
         """Test some coca-cola tweets taken from twitter with spans"""
         result = self.parser.parse(u'Coca-Cola Hits 50 Million Facebook Likes http://bit.ly/QlKOc7')
-        self.assertEqual(result.urls, [('http://bit.ly/QlKOc7', (40, 61))])
+        self.assertEqual(result.urls, [('http://bit.ly/QlKOc7', (41, 61))])
 
         result = self.parser.parse(u' #ABillionReasonsToBelieveInAfrica ARISE MAG.FASHION WEEK NY! Tsemaye B,Maki Oh,Tiffany Amber, Ozwald.Showin NY reasons2beliv @CocaCola_NG', html=False)
         self.assertEqual(result.urls, [])
-        self.assertEqual(result.tags, [(u'ABillionReasonsToBelieveInAfrica', (0, 34))])
+        self.assertEqual(result.tags, [(u'ABillionReasonsToBelieveInAfrica', (1, 34))])
         self.assertEqual(result.users, [(u'CocaCola_NG', (126, 138))])
 
         result = self.parser.parse(u'Follow @CokeZero & Retweet for a chance to win @EASPORTS @EANCAAFootball 13 #GameOn #ad Rules: http://bit.ly/EANCAA', html=False)
-        self.assertEqual(result.urls, [(u'http://bit.ly/EANCAA', (94, 115))])
+        self.assertEqual(result.urls, [(u'http://bit.ly/EANCAA', (95, 115))])
         self.assertEqual(result.users, [(u'CokeZero', (7, 16)), (u'EASPORTS', (47, 56)), (u'EANCAAFootball', (57, 72))])
-        self.assertEqual(result.tags, [(u'GameOn', (75, 83)), (u'ad', (83, 87))])
+        self.assertEqual(result.tags, [(u'GameOn', (76, 83)), (u'ad', (84, 87))])
 
     def test_users_in_tweets(self):
         result = self.parser.parse(u'Follow @CokeZero & Retweet for a chance to win @EASPORTS @EANCAAFootball 13 #GameOn #ad Rules: http://bit.ly/EANCAA @someone', html=False)
         self.assertEqual(result.users, [(u'CokeZero', (7, 16)), (u'EASPORTS', (47, 56)), (u'EANCAAFootball', (57, 72)), (u'someone', (116, 124))])
 
+    def test_edge_cases(self):
+        """Some edge cases that upset the original version of ttp"""
+        result = self.parser.parse(u' @user', html=False)
+        self.assertEqual(result.users, [(u'user', (1, 6))])
+
+        result = self.parser.parse(u' #hash ', html=False)
+        self.assertEqual(result.tags, [(u'hash', (1, 6))])
+
+        result = self.parser.parse(u' http://some.com ', html=False)
+        self.assertEqual(result.urls, [(u'http://some.com', (1, 16))])
+
+
+
 # Test it!
 if __name__ == '__main__':
-    unittest.main() # only seems to run 1 class?
+    unittest.main()
 
     #verbosity = 0 # set to 2 for verbose output
+    #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpansEdgeCases)
+    #unittest.TextTestRunner(verbosity=verbosity).run(suite)
     #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpans)
     #unittest.TextTestRunner(verbosity=verbosity).run(suite)
     #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTests)

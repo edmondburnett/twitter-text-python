@@ -173,7 +173,10 @@ class Parser(object):
             full_url = 'http://%s' % url
 
         if self._include_spans:
-            self._urls.append((url, match.span(0)))
+            span = match.span(0)
+            # add an offset if pre is e.g. ' '
+            span = (span[0] + len(pre), span[1])
+            self._urls.append((url, span))
         else:
             self._urls.append(url)
 
@@ -229,7 +232,10 @@ class Parser(object):
 
         pre, text = mat[:pos], mat[pos + 1:]
         if self._include_spans:
-            self._tags.append((text, match.span(0)))
+            span = match.span(0)
+            # add an offset if pre is e.g. ' '
+            span = (span[0] + len(pre), span[1])
+            self._tags.append((text, span))
         else:
             self._tags.append(text)
 
