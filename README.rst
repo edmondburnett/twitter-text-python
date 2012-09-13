@@ -9,6 +9,12 @@ twitter-text-conformance_ plus some additional ones.
 .. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
 .. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance
 
+UPDATE - forked by Ian Ozsvald, some bugs fixed, few minor changes to functionality added:
+https://github.com/ianozsvald/twitter-text-python
+
+The original ttp comes from:
+https://github.com/BonsaiDen/twitter-text-python
+
 Usage::
 
     >>> import ttp

@@ -15,6 +15,10 @@
 
 # TODO create a setup.py
 
+# Forked by Ian Ozsvald:
+# https://github.com/ianozsvald/twitter-text-python
+# from:
+# https://github.com/BonsaiDen/twitter-text-python
 
 # Tweet Parser and Formatter ---------------------------------------------------
 # ------------------------------------------------------------------------------
