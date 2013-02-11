@@ -13,8 +13,6 @@
 #  You should have received a copy of the GNU General Public License along with
 #  twitter-text-python. If not, see <http://www.gnu.org/licenses/>.
 
-# TODO create a setup.py
-
 # Forked by Ian Ozsvald:
 # https://github.com/ianozsvald/twitter-text-python
 # from:
