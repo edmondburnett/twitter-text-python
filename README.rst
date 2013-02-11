@@ -1,7 +1,7 @@
 twitter-text-python
 ===================
 
-**twitter-text-python** is a Tweet parser and formatter for Python.
+**twitter-text-python** is a Tweet parser and formatter for Python. Extract users, hashtags, URLs and format as HTML for display.
 
 It is based on twitter-text-java_ and passes all the unittests of 
 twitter-text-conformance_ plus some additional ones.
@@ -9,31 +9,66 @@ twitter-text-conformance_ plus some additional ones.
 .. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
 .. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance
 
-UPDATE - forked by Ian Ozsvald, some bugs fixed, few minor changes to functionality added:
+This version was forked by Ian Ozsvald in January 2013 and released to PyPI, some bugs were fixed, a few minor changes to functionality added:
 https://github.com/ianozsvald/twitter-text-python
 
-The original ttp comes from:
+PyPI release:
+http://pypi.python.org/pypi/twitter-text-python/
+
+The original ttp comes from Ivo Wetzel (Ivo's version no longer supported):
 https://github.com/BonsaiDen/twitter-text-python
 
 Usage::
 
     >>> import ttp
     >>> p = ttp.Parser()
-    >>> result = p.parse("@BonsaiDen Hey that's a great Tweet parser! #twp")
+    >>> result = p.parse("@ianozsvald, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
     >>> result.reply
-    'BonsaiDen'
+    'ianozsvald'
     >>> result.users
-    ['BonsaiDen']
+    ['ianozsvald']
     >>> result.tags
-    ['twp']
+    ['IvoWertzel']
     >>> result.urls
-    []
+    ['https://github.com/ianozsvald/']
     >>> result.html
-    u'<a href="http://twitter.com/BonsaiDen">@BonsaiDen</a> Hey that\'s a great Tweet Parser! 
-    <a href="http://search.twitter.com/search?q=%23twp">#twp</a>'
-
+    u'<a href="http://twitter.com/ianozsvald">@ianozsvald</a>, you now support <a href="http://search.twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/ianozsvald/">https://github.com/ianozsvald/</a>'
 
 If you need different HTML output just subclass and override the ``format_*`` methods.
+
+You can also ask for the span tags to be returned for each entity::
+
+    >>> p = ttp.Parser(include_spans=True)
+    >>> result = p.parse("@ianozsvald, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
+    >>> result.urls
+    [('https://github.com/ianozsvald/', (57, 87))]
+
+
+
+Installation
+------------
+
+    $ pip install twitter-text-python  # via: http://pypi.python.org/pypi/twitter-text-python
+    $ python
+    >>> import ttp
+    >>> ttp.__version__
+    '1.0.0'
+
+
+Changelog
+---------
+
+ * 2013/2/11 1.0.0 released to PyPI
+
+
+Tests
+-----
+
+    $ python tests.py
+    .................................................................................................
+    ----------------------------------------------------------------------
+    Ran 97 tests in 0.009s
+    OK
 
 
 Contributing
@@ -43,23 +78,32 @@ The source is available on GitHub_, to
 contribute to the project, fork it on GitHub and send a pull request.
 Everyone is welcome to make improvements to **twp**!
 
-.. _GitHub: http://github.com/BonsaiDen/twitter-text-python
+.. _GitHub: https://github.com/ianozsvald/twitter-text-python
+
 
 License
-=======
+-------
 
-Copyright (c) 2010 Ivo Wetzel
+*MIT*
 
-**twitter-text-python** is free software: you can redistribute it and/or 
-modify it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Copyright (c) 2012 Ivo Wetzel.
 
-**twitter-text-python** is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License along with
-**twitter-text-python**. If not, see <http://www.gnu.org/licenses/>.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+Copyright (c) 2010-2013 Ivo Wetzel
