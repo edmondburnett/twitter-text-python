@@ -57,4 +57,23 @@ pip and easy_install will do the job::
     >>> ttp.__version__
     '1.0.0'
 
+Changelog
+---------
+
+Release history::
+
+    * 2013/2/11 1.0.0 released to PyPI
+
+
+Tests
+-----
+
+Checkout the code via github https://github.com/ianozsvald/twitter-text-python and run tests locally::
+
+    $ python tests.py
+    .................................................................................................
+    ----------------------------------------------------------------------
+    Ran 97 tests in 0.009s
+    OK
+
 
