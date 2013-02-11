@@ -18,3 +18,19 @@ http://pypi.python.org/pypi/twitter-text-python/
 The original ttp comes from Ivo Wetzel (Ivo's version no longer supported):
 https://github.com/BonsaiDen/twitter-text-python
 
+Usage::
+
+    >>> import ttp
+    >>> p = ttp.Parser()
+    >>> result = p.parse("@ianozsvald, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
+    >>> result.reply
+    'ianozsvald'
+    >>> result.users
+    ['ianozsvald']
+    >>> result.tags
+    ['IvoWertzel']
+    >>> result.urls
+    ['https://github.com/ianozsvald/']
+    >>> result.html
+    u'<a href="http://twitter.com/ianozsvald">@ianozsvald</a>, you now support <a href="http://search.twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/ianozsvald/">https://github.com/ianozsvald/</a>'
+
