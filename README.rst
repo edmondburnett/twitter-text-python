@@ -34,3 +34,49 @@ Usage::
     >>> result.html
     u'<a href="http://twitter.com/ianozsvald">@ianozsvald</a>, you now support <a href="http://search.twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/ianozsvald/">https://github.com/ianozsvald/</a>'
 
+If you need different HTML output just subclass and override the ``format_*`` methods.
+
+You can also ask for the span tags to be returned for each entity::
+
+    >>> p = ttp.Parser(include_spans=True)
+    >>> result = p.parse("@ianozsvald, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
+    >>> result.urls
+    [('https://github.com/ianozsvald/', (57, 87))]
+
+
+
+Installation
+------------
+
+    $ pip install twitter-text-python  # via: http://pypi.python.org/pypi/twitter-text-python
+    $ python
+    >>> import ttp
+    >>> ttp.__version__
+    '1.0.0'
+
+
+Changelog
+---------
+
+ * 2013/2/11 1.0.0 released to PyPI
+
+
+Tests
+-----
+
+    $ python tests.py
+    .................................................................................................
+    ----------------------------------------------------------------------
+    Ran 97 tests in 0.009s
+    OK
+
+
+Contributing
+------------
+
+The source is available on GitHub_, to
+contribute to the project, fork it on GitHub and send a pull request.
+Everyone is welcome to make improvements to **twp**!
+
+.. _GitHub: https://github.com/ianozsvald/twitter-text-python
+    
