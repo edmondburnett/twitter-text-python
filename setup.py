@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='twitter-text-python',
-    version='1.0.0',
+    version='1.0.0.2',
     description='Twitter Tweet parser and formatter',
     long_description="Extract @users, #hashtags and URLs from tweets including entity locations, also generate HTML for output. Visit the github site for full instructions.",
     #open('README.rst').read(),
@@ -10,17 +10,17 @@ setup(
     author_email='ian@ianozsvald.com',
     url='https://github.com/ianozsvald/twitter-text-python',
     license='MIT',
-    py_modules=['ttp', 'tests'],
+    packages=['ttp'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[],
-    #data_files=[('./', ['README.rst'])],
     classifiers=[
         'Environment :: Console',
         'Intended Audience :: Developers',
-        #'License :: OSI Approved :: GPL License',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Text Processing :: Linguistic',
     ]
 )

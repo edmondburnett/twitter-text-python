@@ -20,7 +20,7 @@ https://github.com/BonsaiDen/twitter-text-python
 
 Usage::
 
-    >>> import ttp
+    >>> from ttp import ttp
     >>> p = ttp.Parser()
     >>> result = p.parse("@ianozsvald, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
     >>> result.reply
@@ -53,14 +53,14 @@ pip and easy_install will do the job::
     # via: http://pypi.python.org/pypi/twitter-text-python
     $ pip install twitter-text-python  
     $ python
-    >>> import ttp
+    >>> from ttp import ttp
     >>> ttp.__version__
-    '1.0.0'
+    '1.0.0.2'
 
 Changelog
 ---------
 
- * 2013/2/11 1.0.0 released to PyPI
+ * 2013/2/11 1.0.0.2 released to PyPI
 
 
 Tests
