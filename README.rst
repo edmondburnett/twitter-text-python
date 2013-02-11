@@ -58,7 +58,7 @@ Installation
 Changelog
 ---------
 
- * 2013/2/11 1.0.0 released to PyPI
+2013/2/11 1.0.0 released to PyPI
 
 
 Tests
@@ -70,13 +70,3 @@ Tests
     Ran 97 tests in 0.009s
     OK
 
-
-Contributing
-------------
-
-The source is available on GitHub_, to
-contribute to the project, fork it on GitHub and send a pull request.
-Everyone is welcome to make improvements to **twp**!
-
-.. _GitHub: https://github.com/ianozsvald/twitter-text-python
-    
