@@ -48,7 +48,10 @@ You can also ask for the span tags to be returned for each entity::
 Installation
 ------------
 
-    $ pip install twitter-text-python  # via: http://pypi.python.org/pypi/twitter-text-python
+pip and easy_install will do the job::
+
+    # via: http://pypi.python.org/pypi/twitter-text-python
+    $ pip install twitter-text-python  
     $ python
     >>> import ttp
     >>> ttp.__version__
