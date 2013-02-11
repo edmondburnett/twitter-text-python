@@ -60,9 +60,7 @@ pip and easy_install will do the job::
 Changelog
 ---------
 
-Release history::
-
-    * 2013/2/11 1.0.0 released to PyPI
+ * 2013/2/11 1.0.0 released to PyPI
 
 
 Tests
