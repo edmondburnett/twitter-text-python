@@ -84,6 +84,13 @@ Everyone is welcome to make improvements to **twp**!
 .. _GitHub: https://github.com/ianozsvald/twitter-text-python
 
 
+Todo
+----
+
+  * Consider adding capitalised phrase identification
+  * Make it 1 line to parse and get a results dict via __init__.py
+  * Tag the next release
+
 License
 -------
 
