@@ -44,6 +44,14 @@ You can also ask for the span tags to be returned for each entity::
     [('https://github.com/ianozsvald/', (57, 87))]
 
 
+To use the shortlink follower:
+
+    >>> from ttp import utils
+    >>> # assume that result.urls == ['http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF']
+    >>> print utils.follow_shortlinks(result.urls)  # pass in list of shortlink URLs
+    {'http://t.co/8o0z9BbEMu': [u'http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562'], u'http://bbc.in/16dClPF': [u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562']}
+     >>> # note that bad shortlink URLs have a key to an empty list (lost/forgotten shortlink URLs don't generate any error)
+
 
 Installation
 ------------
@@ -61,6 +69,7 @@ Changelog
 ---------
 
  * 2013/2/11 1.0.0.2 released to PyPI
+ * 2013/4/? 1.0.1 new working version
 
 
 Tests

@@ -23,7 +23,7 @@
 import re
 import urllib
 
-__version__ = "1.0.0.2"
+__version__ = "1.0.1.0"
 
 # Some of this code has been translated from the twitter-text-java library:
 # <http://github.com/mzsanford/twitter-text-java>
