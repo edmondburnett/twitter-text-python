@@ -69,7 +69,7 @@ Changelog
 ---------
 
  * 2013/2/11 1.0.0.2 released to PyPI
- * 2013/4/? 1.0.1 new working version
+ * 2013/4/? 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack)
 
 
 Tests
@@ -77,11 +77,12 @@ Tests
 
 Checkout the code via github https://github.com/ianozsvald/twitter-text-python and run tests locally::
 
-    $ python tests.py
-    .................................................................................................
+    $ python ttp/tests.py 
+    ....................................................................................................
     ----------------------------------------------------------------------
-    Ran 97 tests in 0.009s
+    Ran 100 tests in 0.009s
     OK
+
 
 Contributing
 ------------
