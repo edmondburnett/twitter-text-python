@@ -97,6 +97,7 @@ Todo
 ----
 
   * Consider adding capitalised phrase identification
+  * Consider adding a repeated-char remover (e.g. grrrrrrr->grr)
   * Make it 1 line to parse and get a results dict via __init__.py
   * Tag the next release
 

@@ -231,9 +231,19 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'text <a href="http://example.com">http://example.com</a>,')
         self.assertEqual(result.urls, [u'http://example.com'])
 
+    def test_url_with_path_preceeded_by_comma(self):
+        result = self.parser.parse(u'text ,http://example.com/abcde, more')
+        self.assertEqual(result.html, u'text ,<a href="http://example.com/abcde">http://example.com/abcde</a>, more')
+        self.assertEqual(result.urls, [u'http://example.com/abcde'])
+
     def test_url_with_path_followed_comma(self):
         result = self.parser.parse(u'text http://example.com/abcde, more')
         self.assertEqual(result.html, u'text <a href="http://example.com/abcde">http://example.com/abcde</a>, more')
+        self.assertEqual(result.urls, [u'http://example.com/abcde'])
+
+    def test_url_with_path_followed_commas(self):
+        result = self.parser.parse(u'text http://example.com/abcde,, more')
+        self.assertEqual(result.html, u'text <a href="http://example.com/abcde">http://example.com/abcde</a>,, more')
         self.assertEqual(result.urls, [u'http://example.com/abcde'])
 
     def test_url_followed_brace(self):
