@@ -59,7 +59,7 @@ QUERY_CHARS = ur'[a-z0-9!\*\'\(\);:&=\+\$/%#\[\]\-_\.,~]'
 PATH_ENDING_CHARS = r'[%s\)=#/]' % UTF_CHARS
 QUERY_ENDING_CHARS = '[a-z0-9_&=#]'
 
-URL_REGEX = re.compile('((%s)((https?://|www\\.)(%s)(\/%s*%s?)?(\?%s*%s)?))'
+URL_REGEX = re.compile('((%s)((https?://|www\\.)(%s)(\/(%s*%s)?)?(\?%s*%s)?))'
                        % (PRE_CHARS, DOMAIN_CHARS, PATH_CHARS,
                           PATH_ENDING_CHARS, QUERY_CHARS, QUERY_ENDING_CHARS),
                           re.IGNORECASE)
