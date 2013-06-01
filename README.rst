@@ -3,8 +3,8 @@ twitter-text-python
 
 **twitter-text-python** is a Tweet parser and formatter for Python. Extract users, hashtags, URLs and format as HTML for display.
 
-It is based on twitter-text-java_ and passes all the unittests of 
-twitter-text-conformance_ plus some additional ones.
+It is based on twitter-text-java_ and did pass all the unittests of 
+twitter-text-conformance_ plus some additional ones. Note that the conformance tests are now behind (easy PR for someone to work on: https://github.com/ianozsvald/twitter-text-python/issues/5 ):
 
 .. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
 .. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance
@@ -69,7 +69,7 @@ Changelog
 ---------
 
  * 2013/2/11 1.0.0.2 released to PyPI
- * 2013/4/? 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack)
+ * 2013/6/1 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack), used autopep8 to clean the src, added a shortlink expander
 
 
 Tests
@@ -101,6 +101,12 @@ Todo
   * Consider adding a repeated-char remover (e.g. grrrrrrr->grr)
   * Make it 1 line to parse and get a results dict via __init__.py
   * Tag the next release
+
+Doing a release
+---------------
+
+In parent directory on Ian's machine see USE_THIS_FOR_PYPI_RELEASE.txt
+
 
 License
 -------
