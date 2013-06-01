@@ -109,6 +109,7 @@ In parent directory on Ian's machine see USE_THIS_FOR_PYPI_RELEASE.txt. The shor
 
   $ # edit setup.py to bump the version number
   $ git tag -a v1.0.1 -m 'v1.0.1 release'
+  $ git push origin --tags
   $ ianozsvald-twitter-text-python $ python setup.py sdist register  upload -r http://pypi.python.org/pypi
   $ # this uses ~/.pypirc with cached login details
 
