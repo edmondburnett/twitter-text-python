@@ -22,9 +22,9 @@ import ttp
 
 
 class TWPTests(unittest.TestCase):
+
     def setUp(self):
         self.parser = ttp.Parser()
-
 
     # General Tests ------------------------------------------------------------
     # --------------------------------------------------------------------------
@@ -44,7 +44,6 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/4382024406')
         self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/4382024406">http://www.flickr.com/photo...</a>')
         self.assertEqual(result.urls, [u'http://www.flickr.com/photos/29674651@N00/4382024406'])
-
 
     # URL tests ----------------------------------------------------------------
     # --------------------------------------------------------------------------
@@ -90,7 +89,8 @@ class TWPTests(unittest.TestCase):
 
     def test_url_multiple(self):
         result = self.parser.parse(u'http://example.com https://sslexample.com http://sub.example.com')
-        self.assertEqual(result.html, u'<a href="http://example.com">http://example.com</a> <a href="https://sslexample.com">https://sslexample.com</a> <a href="http://sub.example.com">http://sub.example.com</a>')
+        self.assertEqual(
+            result.html, u'<a href="http://example.com">http://example.com</a> <a href="https://sslexample.com">https://sslexample.com</a> <a href="http://sub.example.com">http://sub.example.com</a>')
         self.assertEqual(result.urls, [u'http://example.com', u'https://sslexample.com', u'http://sub.example.com'])
 
     def test_url_raw_domain(self):
@@ -162,7 +162,6 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'text <a href="http://word-and-a-number-8-ftw.domain.tld/">http://word-and-a-number-8-...</a>')
         self.assertEqual(result.urls, [u'http://word-and-a-number-8-ftw.domain.tld/'])
 
-
     # URL not tests ------------------------------------------------------------
     def test_not_url_dotdotdot(self):
         result = self.parser.parse(u'Is www...foo a valid URL?')
@@ -193,7 +192,6 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text http://a.com/ http://a.net/ http://a.org/')
         self.assertEqual(result.html, u'text http://a.com/ http://a.net/ http://a.org/')
         self.assertEqual(result.urls, [])
-
 
     # URL followed Tests -------------------------------------------------------
     def test_url_followed_question(self):
@@ -271,7 +269,6 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'text <a href="http://domain.tld">http://domain.tld</a>-that-you-should-have-put-a-space-after')
         self.assertEqual(result.urls, [u'http://domain.tld'])
 
-
     # URL preceeded Tests -------------------------------------------------------
     def test_url_preceeded_colon(self):
         result = self.parser.parse(u'text:http://example.com')
@@ -294,7 +291,6 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, u'text !http://example.com')
         self.assertEqual(result.urls, [])
 
-
     # URL numeric tests --------------------------------------------------------
     def test_url_at_numeric(self):
         result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/4382024406')
@@ -305,7 +301,6 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'http://www.flickr.com/photos/29674651@N00/foobar')
         self.assertEqual(result.html, u'<a href="http://www.flickr.com/photos/29674651@N00/foobar">http://www.flickr.com/photo...</a>')
         self.assertEqual(result.urls, [u'http://www.flickr.com/photos/29674651@N00/foobar'])
-
 
     # URL domain tests ---------------------------------------------------------
     def test_url_WWW(self):
@@ -320,7 +315,8 @@ class TWPTests(unittest.TestCase):
 
     def test_url_only_domain_query_followed_period(self):
         result = self.parser.parse(u'I think it\'s proper to end sentences with a period http://tell.me/why?=because.i.want.it. Even when they contain a URL.')
-        self.assertEqual(result.html, u'I think it\'s proper to end sentences with a period <a href="http://tell.me/why?=because.i.want.it">http://tell.me/why?=because...</a>. Even when they contain a URL.')
+        self.assertEqual(
+            result.html, u'I think it\'s proper to end sentences with a period <a href="http://tell.me/why?=because.i.want.it">http://tell.me/why?=because...</a>. Even when they contain a URL.')
         self.assertEqual(result.urls, [u'http://tell.me/why?=because.i.want.it'])
 
     def test_url_only_domain_followed_period(self):
@@ -353,7 +349,6 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'badly formatted http://foo_bar.com')
         self.assertEqual(result.html, u'badly formatted http://foo_bar.com')
         self.assertEqual(result.urls, [])
-
 
     # Hashtag tests ------------------------------------------------------------
     # --------------------------------------------------------------------------
@@ -431,7 +426,6 @@ class TWPTests(unittest.TestCase):
         result = self.parser.parse(u'text #hash_tag')
         self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hash_tag">#hash_tag</a>')
         self.assertEqual(result.tags, [u'hash_tag'])
-
 
     # Username tests -----------------------------------------------------------
     # --------------------------------------------------------------------------
@@ -515,7 +509,6 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.users, [u'username'])
         self.assertEqual(result.reply, None)
 
-
     # List tests ---------------------------------------------------------------
     # --------------------------------------------------------------------------
     def test_list_preceeded(self):
@@ -561,7 +554,8 @@ class TWPTests(unittest.TestCase):
 
     def test_list_long_truncate(self):
         result = self.parser.parse(u'@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890A')
-        self.assertEqual(result.html, u'<a href="http://twitter.com/username/list5678901234567890123456789012345678901234567890123456789012345678901234567890">@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890</a>A')
+        self.assertEqual(
+            result.html, u'<a href="http://twitter.com/username/list5678901234567890123456789012345678901234567890123456789012345678901234567890">@username/list5678901234567890123456789012345678901234567890123456789012345678901234567890</a>A')
         self.assertEqual(result.lists, [(u'username', u'list5678901234567890123456789012345678901234567890123456789012345678901234567890')])
 
     def test_list_with_dash(self):
@@ -571,9 +565,10 @@ class TWPTests(unittest.TestCase):
 
 
 class TWPTestsWithSpans(unittest.TestCase):
+
     """Test ttp with re spans to extract character co-ords of matches"""
     def setUp(self):
-        self.parser = ttp.Parser(include_spans = True)
+        self.parser = ttp.Parser(include_spans=True)
 
     def test_spans_in_tweets(self):
         """Test some coca-cola tweets taken from twitter with spans"""
@@ -606,15 +601,14 @@ class TWPTestsWithSpans(unittest.TestCase):
         self.assertEqual(result.urls, [(u'http://some.com', (1, 16))])
 
 
-
 # Test it!
 if __name__ == '__main__':
     unittest.main()
 
-    #verbosity = 0 # set to 2 for verbose output
-    #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpansEdgeCases)
-    #unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpans)
-    #unittest.TextTestRunner(verbosity=verbosity).run(suite)
-    #suite = unittest.TestLoader().loadTestsFromTestCase(TWPTests)
-    #unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    # verbosity = 0 # set to 2 for verbose output
+    # suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpansEdgeCases)
+    # unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    # suite = unittest.TestLoader().loadTestsFromTestCase(TWPTestsWithSpans)
+    # unittest.TextTestRunner(verbosity=verbosity).run(suite)
+    # suite = unittest.TestLoader().loadTestsFromTestCase(TWPTests)
+    # unittest.TextTestRunner(verbosity=verbosity).run(suite)

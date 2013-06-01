@@ -39,8 +39,8 @@ LIST_REGEX = re.compile(LIST_PRE_CHARS + '(' + AT_SIGNS + '+)' + LIST_END_CHARS,
 
 # Users
 USERNAME_REGEX = re.compile(ur'\B' + AT_SIGNS + LIST_END_CHARS, re.IGNORECASE)
-REPLY_REGEX = re.compile(ur'^(?:' + SPACES + ur')*' + AT_SIGNS \
-              + ur'([a-z0-9_]{1,20}).*', re.IGNORECASE)
+REPLY_REGEX = re.compile(ur'^(?:' + SPACES + ur')*' + AT_SIGNS
+                         + ur'([a-z0-9_]{1,20}).*', re.IGNORECASE)
 
 # Hashtags
 HASHTAG_EXP = ur'(^|[^0-9A-Z&/]+)(#|\uff03)([0-9A-Z_]*[A-Z_]+[%s]*)' % UTF_CHARS
@@ -62,13 +62,14 @@ QUERY_ENDING_CHARS = '[a-z0-9_&=#]'
 URL_REGEX = re.compile('((%s)((https?://|www\\.)(%s)(\/(%s*%s)?)?(\?%s*%s)?))'
                        % (PRE_CHARS, DOMAIN_CHARS, PATH_CHARS,
                           PATH_ENDING_CHARS, QUERY_CHARS, QUERY_ENDING_CHARS),
-                          re.IGNORECASE)
+                       re.IGNORECASE)
 
 # Registered IANA one letter domains
 IANA_ONE_LETTER_DOMAINS = ('x.com', 'x.org', 'z.com', 'q.net', 'q.com', 'i.net')
 
 
 class ParseResult(object):
+
     '''A class containing the results of a parsed Tweet.
 
     Attributes:
@@ -109,9 +110,10 @@ class ParseResult(object):
 
 
 class Parser(object):
+
     '''A Tweet Parser'''
 
-    def __init__(self, max_url_length=30, include_spans = False):
+    def __init__(self, max_url_length=30, include_spans=False):
         self._max_url_length = max_url_length
         self._include_spans = include_spans
 
@@ -143,7 +145,6 @@ class Parser(object):
         html = USERNAME_REGEX.sub(self._parse_users, html)
         html = LIST_REGEX.sub(self._parse_lists, html)
         return HASHTAG_REGEX.sub(self._parse_tags, html)
-
 
     # Internal parser stuff ----------------------------------------------------
     def _parse_urls(self, match):
@@ -186,7 +187,7 @@ class Parser(object):
 
         if self._html:
             return '%s%s' % (pre, self.format_url(full_url,
-                                       self._shorten_url(escape(url))))
+                                                  self._shorten_url(escape(url))))
 
     def _parse_users(self, match):
         '''Parse usernames.'''
@@ -261,12 +262,11 @@ class Parser(object):
         else:
             return text
 
-
     # User defined formatters --------------------------------------------------
     def format_tag(self, tag, text):
         '''Return formatted HTML for a hashtag.'''
         return '<a href="http://search.twitter.com/search?q=%s">%s%s</a>' \
-                % (urllib.quote('#' + text.encode('utf-8')), tag, text)
+            % (urllib.quote('#' + text.encode('utf-8')), tag, text)
 
     def format_username(self, at_char, user):
         '''Return formatted HTML for a username.'''
@@ -289,4 +289,3 @@ def escape(text):
     return ''.join({'&': '&amp;', '"': '&quot;',
                     '\'': '&apos;', '>': '&gt;',
                     '<': '&lt;'}.get(c, c) for c in text)
-
