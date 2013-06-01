@@ -2,9 +2,9 @@ from setuptools import setup
 
 setup(
     name='twitter-text-python',
-    version='1.0.0.2',
+    version='1.0.1',
     description='Twitter Tweet parser and formatter',
-    long_description="Extract @users, #hashtags and URLs from tweets including entity locations, also generate HTML for output. Visit the github site for full instructions.",
+    long_description="Extract @users, #hashtags and URLs (and unwind shortened links) from tweets including entity locations, also generate HTML for output. Visit https://github.com/ianozsvald/twitter-text-python for examples.",
     #open('README.rst').read(),
     author='Maintained by Ian Ozsvald (originally by Ivo Wetzel)',
     author_email='ian@ianozsvald.com',
