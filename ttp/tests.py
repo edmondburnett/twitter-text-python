@@ -74,7 +74,7 @@ class TWPTests(unittest.TestCase):
 
     def test_url_amp_lang_equals(self):
         result = self.parser.parse(u'Check out http://twitter.com/search?q=avro&lang=en')
-        self.assertEqual(result.html, u'Check out <a href="http://twitter.com/search?q=avro&amp;lang=en">http://search.twitter.com/s...</a>')
+        self.assertEqual(result.html, u'Check out <a href="http://twitter.com/search?q=avro&amp;lang=en">http://twitter.com/s...</a>')
         self.assertEqual(result.urls, [u'http://twitter.com/search?q=avro&lang=en'])
 
     def test_url_amp_break(self):
