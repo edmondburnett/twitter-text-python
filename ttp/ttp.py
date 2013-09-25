@@ -265,7 +265,7 @@ class Parser(object):
     # User defined formatters --------------------------------------------------
     def format_tag(self, tag, text):
         '''Return formatted HTML for a hashtag.'''
-        return '<a href="http://search.twitter.com/search?q=%s">%s%s</a>' \
+        return '<a href="http://twitter.com/search?q=%s">%s%s</a>' \
             % (urllib.quote('#' + text.encode('utf-8')), tag, text)
 
     def format_username(self, at_char, user):
