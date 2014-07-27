@@ -265,22 +265,22 @@ class Parser(object):
     # User defined formatters --------------------------------------------------
     def format_tag(self, tag, text):
         '''Return formatted HTML for a hashtag.'''
-        return '<a href="http://twitter.com/search?q=%s">%s%s</a>' \
+        return '<a href="https://twitter.com/search?q=%s" target="_blank">%s%s</a>' \
             % (urllib.quote('#' + text.encode('utf-8')), tag, text)
 
     def format_username(self, at_char, user):
         '''Return formatted HTML for a username.'''
-        return '<a href="http://twitter.com/%s">%s%s</a>' \
+        return '<a href="https://twitter.com/%s" target="_blank">%s%s</a>' \
                % (user, at_char, user)
 
     def format_list(self, at_char, user, list_name):
         '''Return formatted HTML for a list.'''
-        return '<a href="http://twitter.com/%s/%s">%s%s/%s</a>' \
+        return '<a href="https://twitter.com/%s/%s" target="_blank">%s%s/%s</a>' \
                % (user, list_name, at_char, user, list_name)
 
     def format_url(self, url, text):
         '''Return formatted HTML for a url.'''
-        return '<a href="%s">%s</a>' % (escape(url), text)
+        return '<a href="%s" target="_blank">%s</a>' % (escape(url), text)
 
 
 # Simple URL escaper
