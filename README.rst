@@ -3,20 +3,26 @@ twitter-text-python
 
 **twitter-text-python** is a Tweet parser and formatter for Python. Extract users, hashtags, URLs and format as HTML for display.
 
+
+PyPI release:
+http://pypi.python.org/pypi/twitter-text-python/
+
+The current version was forked by Edmond Burnett in July 2014:
+https://github.com/edburnett/twitter-text-python
+
+The library was forked by Ian Ozsvald in January 2013 and released to PyPI, some bugs were fixed, a few minor changes to functionality added (no longer supported):
+https://github.com/ianozsvald/twitter-text-python
+
+The original ttp comes from Ivo Wetzel (no longer supported):
+https://github.com/BonsaiDen/twitter-text-python
+
 It is based on twitter-text-java_ and did pass all the unittests of 
 twitter-text-conformance_ plus some additional ones. Note that the conformance tests are now behind (easy PR for someone to work on: https://github.com/ianozsvald/twitter-text-python/issues/5 ):
 
 .. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
 .. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance
 
-This version was forked by Ian Ozsvald in January 2013 and released to PyPI, some bugs were fixed, a few minor changes to functionality added:
-https://github.com/ianozsvald/twitter-text-python
 
-PyPI release:
-http://pypi.python.org/pypi/twitter-text-python/
-
-The original ttp comes from Ivo Wetzel (Ivo's version no longer supported):
-https://github.com/BonsaiDen/twitter-text-python
 
 Usage::
 
@@ -75,7 +81,7 @@ Changelog
 Tests
 -----
 
-Checkout the code via github https://github.com/ianozsvald/twitter-text-python and run tests locally::
+Checkout the code via github https://github.com/edburnett/twitter-text-python and run tests locally::
 
     $ python ttp/tests.py 
     ....................................................................................................
@@ -91,7 +97,7 @@ The source is available on GitHub_, to
 contribute to the project, fork it on GitHub and send a pull request.
 Everyone is welcome to make improvements to **twp**!
 
-.. _GitHub: https://github.com/ianozsvald/twitter-text-python
+.. _GitHub: https://github.com/edburnett/twitter-text-python
 
 
 Todo

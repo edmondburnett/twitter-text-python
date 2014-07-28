@@ -354,22 +354,22 @@ class TWPTests(unittest.TestCase):
     # --------------------------------------------------------------------------
     def test_hashtag_followed_full_whitespace(self):
         result = self.parser.parse(u'#hashtag　text')
-        self.assertEqual(result.html, u'<a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>　text')
+        self.assertEqual(result.html, u'<a href="https://twitter.com/search?q=%23hashtag">#hashtag</a>　text')
         self.assertEqual(result.tags, [u'hashtag'])
 
     def test_hashtag_followed_full_hash(self):
         result = self.parser.parse(u'＃hashtag')
-        self.assertEqual(result.html, u'<a href="http://search.twitter.com/search?q=%23hashtag">＃hashtag</a>')
+        self.assertEqual(result.html, u'<a href="https://twitter.com/search?q=%23hashtag">＃hashtag</a>')
         self.assertEqual(result.tags, [u'hashtag'])
 
     def test_hashtag_preceeded_full_whitespace(self):
         result = self.parser.parse(u'text　#hashtag')
-        self.assertEqual(result.html, u'text　<a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>')
+        self.assertEqual(result.html, u'text　<a href="https://twitter.com/search?q=%23hashtag">#hashtag</a>')
         self.assertEqual(result.tags, [u'hashtag'])
 
     def test_hashtag_number(self):
         result = self.parser.parse(u'text #1tag')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%231tag">#1tag</a>')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%231tag">#1tag</a>')
         self.assertEqual(result.tags, [u'1tag'])
 
     def test_not_hashtag_escape(self):
@@ -379,27 +379,27 @@ class TWPTests(unittest.TestCase):
 
     def test_hashtag_japanese(self):
         result = self.parser.parse(u'text #hashtagの')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>の')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%23hashtag">#hashtag</a>の')
         self.assertEqual(result.tags, [u'hashtag'])
 
     def test_hashtag_period(self):
         result = self.parser.parse(u'text.#hashtag')
-        self.assertEqual(result.html, u'text.<a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>')
+        self.assertEqual(result.html, u'text.<a href="https://twitter.com/search?q=%23hashtag">#hashtag</a>')
         self.assertEqual(result.tags, [u'hashtag'])
 
     def test_hashtag_trailing(self):
         result = self.parser.parse(u'text #hashtag')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%23hashtag">#hashtag</a>')
         self.assertEqual(result.tags, [u'hashtag'])
 
     def test_not_hashtag_exclamation(self):
         result = self.parser.parse(u'text #hashtag!')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hashtag">#hashtag</a>!')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%23hashtag">#hashtag</a>!')
         self.assertEqual(result.tags, [u'hashtag'])
 
     def test_hashtag_multiple(self):
         result = self.parser.parse(u'text #hashtag1 #hashtag2')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hashtag1">#hashtag1</a> <a href="http://search.twitter.com/search?q=%23hashtag2">#hashtag2</a>')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%23hashtag1">#hashtag1</a> <a href="https://twitter.com/search?q=%23hashtag2">#hashtag2</a>')
         self.assertEqual(result.tags, [u'hashtag1', u'hashtag2'])
 
     def test_not_hashtag_number(self):
@@ -414,17 +414,17 @@ class TWPTests(unittest.TestCase):
 
     def test_hashtag_umlaut(self):
         result = self.parser.parse(u'text #hash_tagüäö')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hash_tag%C3%BC%C3%A4%C3%B6">#hash_tagüäö</a>')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%23hash_tag%C3%BC%C3%A4%C3%B6">#hash_tagüäö</a>')
         self.assertEqual(result.tags, [u'hash_tag\xfc\xe4\xf6'])
 
     def test_hashtag_alpha(self):
         result = self.parser.parse(u'text #hash0tag')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hash0tag">#hash0tag</a>')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%23hash0tag">#hash0tag</a>')
         self.assertEqual(result.tags, [u'hash0tag'])
 
     def test_hashtag_under(self):
         result = self.parser.parse(u'text #hash_tag')
-        self.assertEqual(result.html, u'text <a href="http://search.twitter.com/search?q=%23hash_tag">#hash_tag</a>')
+        self.assertEqual(result.html, u'text <a href="https://twitter.com/search?q=%23hash_tag">#hash_tag</a>')
         self.assertEqual(result.tags, [u'hash_tag'])
 
     # Username tests -----------------------------------------------------------
