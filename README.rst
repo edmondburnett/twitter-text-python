@@ -111,7 +111,7 @@ Todo
 Doing a release
 ---------------
 
-In parent directory on Ian's machine see USE_THIS_FOR_PYPI_RELEASE.txt. The short form::
+In parent directory on Edmond's machine see USE_THIS_FOR_PYPI_RELEASE.txt. The short form::
 
     $ # edit setup.py to bump the version number
     $ git tag -a v1.0.1 -m 'v1.0.1 release'
