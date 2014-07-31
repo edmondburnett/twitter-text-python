@@ -29,17 +29,17 @@ Usage
 
     >>> from ttp import ttp
     >>> p = ttp.Parser()
-    >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
+    >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
     >>> result.reply
-    'ianozsvald'
+    'burnettedmond'
     >>> result.users
-    ['ianozsvald']
+    ['burnettedmond']
     >>> result.tags
     ['IvoWertzel']
     >>> result.urls
-    ['https://github.com/ianozsvald/']
+    ['https://github.com/burnettedmond/']
     >>> result.html
-    u'<a href="http://twitter.com/ianozsvald">@ianozsvald</a>, you now support <a href="http://search.twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/ianozsvald/">https://github.com/ianozsvald/</a>'
+    u'<a href="http://twitter.com/burnettedmond">@burnettedmond</a>, you now support <a href="https://twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/edburnett/">https://github.com/edburnett/</a>'
 
 If you need different HTML output just subclass and override the ``format_*`` methods.
 
