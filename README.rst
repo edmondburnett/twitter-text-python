@@ -24,11 +24,12 @@ twitter-text-conformance_ plus some additional ones. Note that the conformance t
 
 
 
-Usage::
+Usage
+-----
 
     >>> from ttp import ttp
     >>> p = ttp.Parser()
-    >>> result = p.parse("@ianozsvald, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
+    >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
     >>> result.reply
     'ianozsvald'
     >>> result.users
@@ -45,9 +46,9 @@ If you need different HTML output just subclass and override the ``format_*`` me
 You can also ask for the span tags to be returned for each entity::
 
     >>> p = ttp.Parser(include_spans=True)
-    >>> result = p.parse("@ianozsvald, you now support #IvoWertzel's tweet parser! https://github.com/ianozsvald/")
+    >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
     >>> result.urls
-    [('https://github.com/ianozsvald/', (57, 87))]
+    [('https://github.com/burnettedmond/', (57, 87))]
 
 
 To use the shortlink follower:
@@ -74,8 +75,9 @@ pip and easy_install will do the job::
 Changelog
 ---------
 
- * 2013/2/11 1.0.0.2 released to PyPI
- * 2013/6/1 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack), used autopep8 to clean the src, added a shortlink expander
+* 2014/7/30 1.0.3 Update parsed URLs for Twitter API 1.1 compatibility
+* 2013/6/1 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack), used autopep8 to clean the src, added a shortlink expander
+* 2013/2/11 1.0.0.2 released to PyPI
 
 
 Tests
@@ -116,7 +118,7 @@ In parent directory on Edmond's machine see USE_THIS_FOR_PYPI_RELEASE.txt. The s
     $ # edit setup.py to bump the version number
     $ git tag -a v1.0.1 -m 'v1.0.1 release'
     $ git push origin --tags
-    $ ianozsvald-twitter-text-python $ python setup.py sdist register  upload -r http://pypi.python.org/pypi
+    $ twitter-text-python $ python setup.py sdist register upload
     $ # this uses ~/.pypirc with cached login details
 
 
