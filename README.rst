@@ -7,21 +7,11 @@ twitter-text-python
 PyPI release:
 http://pypi.python.org/pypi/twitter-text-python/
 
-The current version was forked by Edmond Burnett in July 2014:
-https://github.com/edburnett/twitter-text-python
 
-The library was forked by Ian Ozsvald in January 2013 and released to PyPI, some bugs were fixed, a few minor changes to functionality added (no longer supported):
-https://github.com/ianozsvald/twitter-text-python
+Installation
+------------
 
-The original ttp comes from Ivo Wetzel (no longer supported):
-https://github.com/BonsaiDen/twitter-text-python
-
-It is based on twitter-text-java_ and did pass all the unittests of 
-twitter-text-conformance_ plus some additional ones. Note that the conformance tests are now behind (easy PR for someone to work on: https://github.com/ianozsvald/twitter-text-python/issues/5 ):
-
-.. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
-.. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance
-
+    pip install twitter-text-python
 
 
 Usage
@@ -59,18 +49,6 @@ To use the shortlink follower:
     {'http://t.co/8o0z9BbEMu': [u'http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562'], u'http://bbc.in/16dClPF': [u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562']}
      >>> # note that bad shortlink URLs have a key to an empty list (lost/forgotten shortlink URLs don't generate any error)
 
-
-Installation
-------------
-
-pip and easy_install will do the job::
-
-    # via: http://pypi.python.org/pypi/twitter-text-python
-    $ pip install twitter-text-python  
-    $ python
-    >>> from ttp import ttp
-    >>> ttp.__version__
-    '1.0.0.2'
 
 Changelog
 ---------
@@ -110,6 +88,7 @@ Todo
   * Make it 1 line to parse and get a results dict via __init__.py
   * Tag the next release
 
+
 Doing a release
 ---------------
 
@@ -120,6 +99,25 @@ In parent directory on Edmond's machine see USE_THIS_FOR_PYPI_RELEASE.txt. The s
     $ git push origin --tags
     $ twitter-text-python $ python setup.py sdist register upload
     $ # this uses ~/.pypirc with cached login details
+
+
+History
+-------
+
+The current version was forked by Edmond Burnett in July 2014:
+https://github.com/edburnett/twitter-text-python
+
+The library was forked by Ian Ozsvald in January 2013 and released to PyPI, some bugs were fixed, a few minor changes to functionality added (no longer supported):
+https://github.com/ianozsvald/twitter-text-python
+
+The original ttp comes from Ivo Wetzel (no longer supported):
+https://github.com/BonsaiDen/twitter-text-python
+
+It is based on twitter-text-java_ and did pass all the unittests of 
+twitter-text-conformance_ plus some additional ones. Note that the conformance tests are now behind (easy PR for someone to work on: https://github.com/ianozsvald/twitter-text-python/issues/5 ):
+
+.. _twitter-text-java: http://github.com/mzsanford/twitter-text-java
+.. _twitter-text-conformance: http://github.com/mzsanford/twitter-text-conformance
 
 
 License
