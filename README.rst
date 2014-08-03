@@ -11,7 +11,7 @@ http://pypi.python.org/pypi/twitter-text-python/
 Installation
 ------------
 
-    pip install twitter-text-python
+    $ pip install twitter-text-python
 
 
 Usage
@@ -75,7 +75,7 @@ Contributing
 
 The source is available on GitHub_, to
 contribute to the project, fork it on GitHub and send a pull request.
-Everyone is welcome to make improvements to **twp**!
+Everyone is welcome to make improvements to **ttp**!
 
 .. _GitHub: https://github.com/edburnett/twitter-text-python
 
