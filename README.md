@@ -72,8 +72,8 @@ Checkout the code via github https://github.com/edburnett/twitter-text-python an
 contributing
 ------------
 
-See the relevant (wiki
-page)[https://github.com/edburnett/twitter-text-python/wiki/Contributing] for
+See the relevant [wiki
+page](https://github.com/edburnett/twitter-text-python/wiki/Contributing) for
 notes on contributing to **twitter-text-python**.
 
 
