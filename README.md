@@ -89,7 +89,7 @@ https://github.com/ianozsvald/twitter-text-python
 The original ttp comes from Ivo Wetzel (no longer supported):
 https://github.com/BonsaiDen/twitter-text-python
 
-Originally based on [http://github.com/mzsanford/twitter-text-java](twitter-text-java).
+Originally based on [http://github.com/mzsanford/twitter-text-java](mzsanford/twitter-text-java).
 
 
 license
