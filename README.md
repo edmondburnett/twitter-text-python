@@ -72,12 +72,7 @@ Checkout the code via github https://github.com/edburnett/twitter-text-python an
 contributing
 ------------
 
-The source is available on
-[https://github.com/edburnett/twitter-text-python](GitHub), to contribute to
-the project, fork it on GitHub and send a pull request. Everyone is welcome to
-make improvements to **twitter-text-python**!
-
-https://github.com/edburnett/twitter-text-python
+See the wiki for notes on contributing to **twitter-text-python**.
 
 
 history
