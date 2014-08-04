@@ -10,15 +10,15 @@ http://pypi.python.org/pypi/twitter-text-python/
 
 Installation
 ------------
-
     ::
+
     pip install twitter-text-python
 
 
 Usage
 -----
-
     ::
+
     >>> from ttp import ttp
     >>> p = ttp.Parser()
     >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
