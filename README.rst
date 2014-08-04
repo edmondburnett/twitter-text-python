@@ -11,12 +11,14 @@ http://pypi.python.org/pypi/twitter-text-python/
 Installation
 ------------
 
-    $ pip install twitter-text-python
+    ::
+    pip install twitter-text-python
 
 
 Usage
 -----
 
+    ::
     >>> from ttp import ttp
     >>> p = ttp.Parser()
     >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
@@ -41,7 +43,7 @@ You can also ask for the span tags to be returned for each entity::
     [('https://github.com/burnettedmond/', (57, 87))]
 
 
-To use the shortlink follower:
+To use the shortlink follower::
 
     >>> from ttp import utils
     >>> # assume that result.urls == ['http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF']
@@ -83,10 +85,10 @@ Everyone is welcome to make improvements to **ttp**!
 Todo
 ----
 
-  * Consider adding capitalised phrase identification
-  * Consider adding a repeated-char remover (e.g. grrrrrrr->grr)
-  * Make it 1 line to parse and get a results dict via __init__.py
-  * Tag the next release
+* Consider adding capitalised phrase identification
+* Consider adding a repeated-char remover (e.g. grrrrrrr->grr)
+* Make it 1 line to parse and get a results dict via __init__.py
+* Tag the next release
 
 
 Doing a release
