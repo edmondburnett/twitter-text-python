@@ -20,6 +20,8 @@
 
 # Tweet Parser and Formatter ---------------------------------------------------
 # ------------------------------------------------------------------------------
+from __future__ import unicode_literals
+
 import re
 import urllib
 
@@ -27,31 +29,31 @@ __version__ = "1.0.1.0"
 
 # Some of this code has been translated from the twitter-text-java library:
 # <http://github.com/mzsanford/twitter-text-java>
-AT_SIGNS = ur'[@\uff20]'
-UTF_CHARS = ur'a-z0-9_\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u00ff'
-SPACES = ur'[\u0020\u00A0\u1680\u180E\u2002-\u202F\u205F\u2060\u3000]'
+AT_SIGNS = r'[@\uff20]'
+UTF_CHARS = r'a-z0-9_\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u00ff'
+SPACES = r'[\u0020\u00A0\u1680\u180E\u2002-\u202F\u205F\u2060\u3000]'
 
 # Lists
-LIST_PRE_CHARS = ur'([^a-z0-9_]|^)'
-LIST_END_CHARS = ur'([a-z0-9_]{1,20})(/[a-z][a-z0-9\x80-\xFF-]{0,79})?'
+LIST_PRE_CHARS = r'([^a-z0-9_]|^)'
+LIST_END_CHARS = r'([a-z0-9_]{1,20})(/[a-z][a-z0-9\x80-\xFF-]{0,79})?'
 LIST_REGEX = re.compile(LIST_PRE_CHARS + '(' + AT_SIGNS + '+)' + LIST_END_CHARS,
                         re.IGNORECASE)
 
 # Users
-USERNAME_REGEX = re.compile(ur'\B' + AT_SIGNS + LIST_END_CHARS, re.IGNORECASE)
-REPLY_REGEX = re.compile(ur'^(?:' + SPACES + ur')*' + AT_SIGNS
-                         + ur'([a-z0-9_]{1,20}).*', re.IGNORECASE)
+USERNAME_REGEX = re.compile(r'\B' + AT_SIGNS + LIST_END_CHARS, re.IGNORECASE)
+REPLY_REGEX = re.compile(r'^(?:' + SPACES + r')*' + AT_SIGNS
+                         + r'([a-z0-9_]{1,20}).*', re.IGNORECASE)
 
 # Hashtags
-HASHTAG_EXP = ur'(^|[^0-9A-Z&/]+)(#|\uff03)([0-9A-Z_]*[A-Z_]+[%s]*)' % UTF_CHARS
+HASHTAG_EXP = r'(^|[^0-9A-Z&/]+)(#|\uff03)([0-9A-Z_]*[A-Z_]+[%s]*)' % UTF_CHARS
 HASHTAG_REGEX = re.compile(HASHTAG_EXP, re.IGNORECASE)
 
 
 # URLs
-PRE_CHARS = ur'(?:[^/"\':!=]|^|\:)'
-DOMAIN_CHARS = ur'([\.-]|[^\s_\!\.\/])+\.[a-z]{2,}(?::[0-9]+)?'
-PATH_CHARS = ur'(?:[\.,]?[%s!\*\'\(\);:=\+\$/%s#\[\]\-_,~@])' % (UTF_CHARS, '%')
-QUERY_CHARS = ur'[a-z0-9!\*\'\(\);:&=\+\$/%#\[\]\-_\.,~]'
+PRE_CHARS = r'(?:[^/"\':!=]|^|\:)'
+DOMAIN_CHARS = r'([\.-]|[^\s_\!\.\/])+\.[a-z]{2,}(?::[0-9]+)?'
+PATH_CHARS = r'(?:[\.,]?[%s!\*\'\(\);:=\+\$/%s#\[\]\-_,~@])' % (UTF_CHARS, '%')
+QUERY_CHARS = r'[a-z0-9!\*\'\(\);:&=\+\$/%#\[\]\-_\.,~]'
 
 # Valid end-of-path chracters (so /foo. does not gobble the period).
 # 1. Allow ) for Wikipedia URLs.
@@ -266,7 +268,7 @@ class Parser(object):
     def format_tag(self, tag, text):
         '''Return formatted HTML for a hashtag.'''
         return '<a href="https://twitter.com/search?q=%s">%s%s</a>' \
-            % (urllib.quote('#' + text.encode('utf-8')), tag, text)
+            % (urllib.quote(('#' + text).encode('utf-8')), tag, text)
 
     def format_username(self, at_char, user):
         '''Return formatted HTML for a username.'''
