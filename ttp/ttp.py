@@ -23,7 +23,10 @@
 from __future__ import unicode_literals
 
 import re
-import urllib
+try:
+    from urllib.parse import quote  # Python3
+except ImportError:
+    from urllib import quote
 
 __version__ = "1.0.1.0"
 
@@ -268,7 +271,7 @@ class Parser(object):
     def format_tag(self, tag, text):
         '''Return formatted HTML for a hashtag.'''
         return '<a href="https://twitter.com/search?q=%s">%s%s</a>' \
-            % (urllib.quote(('#' + text).encode('utf-8')), tag, text)
+            % (quote(('#' + text).encode('utf-8')), tag, text)
 
     def format_username(self, at_char, user):
         '''Return formatted HTML for a username.'''
