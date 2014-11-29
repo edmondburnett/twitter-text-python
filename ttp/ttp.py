@@ -234,7 +234,7 @@ class Parser(object):
 
         # Fix problems with the regex capturing stuff infront of the #
         tag = None
-        for i in u'#\uff03':
+        for i in '#\uff03':
             pos = mat.rfind(i)
             if pos != -1:
                 tag = i
