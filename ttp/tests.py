@@ -1,18 +1,19 @@
 # -*- coding: UTF-8 -*-
 #  This file is part of twitter-text-python.
 #
+#  The MIT License (MIT)
+#
+#  Copyright (c) 2012-2013 Ivo Wetzel
+#
 #  twitter-text-python is free software: you can redistribute it and/or
-#  modify it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
+#  modify it under the terms of the MIT License.
 #
-#  twitter-text-python is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#  GNU General Public License for more details.
+#  You should have received a copy of the MIT License along with
+#  twitter-text-python. If not, see <http://opensource.org/licenses/MIT>.
 #
-#  You should have received a copy of the GNU General Public License along with
-#  twitter-text-python. If not, see <http://www.gnu.org/licenses/>.
+#  Maintained by Edmond Burnett:
+#  https://github.com/edburnett/twitter-text-python
+#  (previously Ian Ozsvald and Ivo Wetzel)
 
 
 # twp - Unittests --------------------------------------------------------------

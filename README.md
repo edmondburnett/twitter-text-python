@@ -40,7 +40,7 @@ You can also ask for the span tags to be returned for each entity:
     [('https://github.com/burnettedmond/', (57, 87))]
 
 
-To use the shortlink follower
+To use the shortlink follower:
 
     >>> from ttp import utils
     >>> # assume that result.urls == ['http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF']
@@ -60,7 +60,7 @@ changelog
 tests
 -----
 
-Checkout the code via github https://github.com/edburnett/twitter-text-python and run tests locally::
+Run the unit tests:
 
     $ python ttp/tests.py 
     ....................................................................................................
@@ -83,39 +83,38 @@ history
 The current version was forked by Edmond Burnett in July 2014:
 https://github.com/edburnett/twitter-text-python
 
-The library was forked by Ian Ozsvald in January 2013 and released to PyPI, some bugs were fixed, a few minor changes to functionality added (no longer supported):
-https://github.com/ianozsvald/twitter-text-python
+The library was forked by Ian Ozsvald in January 2013 and released to PyPI,
+some bugs were fixed, a few minor changes to functionality added (no longer
+supported): https://github.com/ianozsvald/twitter-text-python
 
 The original ttp comes from Ivo Wetzel (no longer supported):
 https://github.com/BonsaiDen/twitter-text-python
 
-Originally based on [https://github.com/mzsanford/twitter-text-java](https://github.com/mzsanford/twitter-text-java).
+Originally based on
+[https://github.com/mzsanford/twitter-text-java](https://github.com/mzsanford/twitter-text-java).
 
 
 license
 -------
 
-*MIT*
+The MIT License (MIT)
 
-Copyright (c) 2012 Ivo Wetzel.
+Copyright (c) 2012-2013 Ivo Wetzel.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-Copyright (c) 2010-2013 Ivo Wetzel
-
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

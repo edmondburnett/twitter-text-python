@@ -1,22 +1,19 @@
 #  This file is part of twitter-text-python.
 #
+#  The MIT License (MIT)
+#
+#  Copyright (c) 2012-2013 Ivo Wetzel
+#
 #  twitter-text-python is free software: you can redistribute it and/or
-#  modify it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
+#  modify it under the terms of the MIT License.
 #
-#  twitter-text-python is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#  GNU General Public License for more details.
+#  You should have received a copy of the MIT License along with
+#  twitter-text-python. If not, see <http://opensource.org/licenses/MIT>.
 #
-#  You should have received a copy of the GNU General Public License along with
-#  twitter-text-python. If not, see <http://www.gnu.org/licenses/>.
+#  Maintained by Edmond Burnett:
+#  https://github.com/edburnett/twitter-text-python
+#  (previously Ian Ozsvald and Ivo Wetzel)
 
-# Forked by Ian Ozsvald:
-# https://github.com/ianozsvald/twitter-text-python
-# from:
-# https://github.com/BonsaiDen/twitter-text-python
 
 # Tweet Parser and Formatter ---------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -28,7 +25,7 @@ try:
 except ImportError:
     from urllib import quote
 
-__version__ = "1.0.1.0"
+__version__ = "1.0.3.0"
 
 # Some of this code has been translated from the twitter-text-java library:
 # <http://github.com/mzsanford/twitter-text-java>
