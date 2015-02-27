@@ -16,37 +16,43 @@ installation
 usage
 -----
 
-    >>> from ttp import ttp
-    >>> p = ttp.Parser()
-    >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
-    >>> result.reply
-    'burnettedmond'
-    >>> result.users
-    ['burnettedmond']
-    >>> result.tags
-    ['IvoWertzel']
-    >>> result.urls
-    ['https://github.com/burnettedmond/']
-    >>> result.html
-    u'<a href="http://twitter.com/burnettedmond">@burnettedmond</a>, you now support <a href="https://twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/edburnett/">https://github.com/edburnett/</a>'
+```python
+>>> from ttp import ttp
+>>> p = ttp.Parser()
+>>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
+>>> result.reply
+'burnettedmond'
+>>> result.users
+['burnettedmond']
+>>> result.tags
+['IvoWertzel']
+>>> result.urls
+['https://github.com/burnettedmond/']
+>>> result.html
+u'<a href="http://twitter.com/burnettedmond">@burnettedmond</a>, you now support <a href="https://twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/edburnett/">https://github.com/edburnett/</a>'
+```
 
 If you need different HTML output just subclass and override the `format_*` methods.
 
 You can also ask for the span tags to be returned for each entity:
 
-    >>> p = ttp.Parser(include_spans=True)
-    >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
-    >>> result.urls
-    [('https://github.com/burnettedmond/', (57, 87))]
+```python
+>>> p = ttp.Parser(include_spans=True)
+>>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
+>>> result.urls
+[('https://github.com/burnettedmond/', (57, 87))]
+```
 
 
 To use the shortlink follower (depends on the [Requests](http://docs.python-requests.org/) library):
 
-    >>> from ttp import utils
-    >>> # assume that result.urls == ['http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF']
-    >>> print utils.follow_shortlinks(result.urls)  # pass in list of shortlink URLs
-    {'http://t.co/8o0z9BbEMu': [u'http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562'], u'http://bbc.in/16dClPF': [u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562']}
-     >>> # note that bad shortlink URLs have a key to an empty list (lost/forgotten shortlink URLs don't generate any error)
+```python
+>>> from ttp import utils
+>>> # assume that result.urls == ['http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF']
+>>> print utils.follow_shortlinks(result.urls)  # pass in list of shortlink URLs
+{'http://t.co/8o0z9BbEMu': [u'http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562'], u'http://bbc.in/16dClPF': [u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562']}
+ >>> # note that bad shortlink URLs have a key to an empty list (lost/forgotten shortlink URLs don't generate any error)
+```
 
 
 changelog
