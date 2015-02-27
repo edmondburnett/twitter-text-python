@@ -40,7 +40,7 @@ You can also ask for the span tags to be returned for each entity:
     [('https://github.com/burnettedmond/', (57, 87))]
 
 
-To use the shortlink follower:
+To use the shortlink follower (depends on the [Requests](http://docs.python-requests.org/) library):
 
     >>> from ttp import utils
     >>> # assume that result.urls == ['http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF']
