@@ -26,7 +26,7 @@ try:
 except ImportError:
     from urllib import quote
 
-__version__ = "1.0.3.0"
+__version__ = "1.1.0.0"
 
 AT_SIGNS = r'[@\uff20]'
 UTF_CHARS = r'a-z0-9_\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u00ff'

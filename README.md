@@ -58,9 +58,10 @@ To use the shortlink follower (depends on the [Requests](http://docs.python-requ
 changelog
 ---------
 
-* 2014/7/30 1.0.3 Update parsed URLs for Twitter API 1.1 compatibility
-* 2013/6/1 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack), used autopep8 to clean the src, added a shortlink expander
-* 2013/2/11 1.0.0.2 released to PyPI
+* 2015/04/11 1.1.0 Add basic support for Python 3
+* 2014/07/30 1.0.3 Update parsed URLs for Twitter API 1.1 compatibility
+* 2013/06/01 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack), used autopep8 to clean the src, added a shortlink expander
+* 2013/02/11 1.0.0.2 released to PyPI
 
 
 tests
