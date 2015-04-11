@@ -20,6 +20,7 @@
 from __future__ import unicode_literals
 
 import re
+import sys
 try:
     from urllib.parse import quote  # Python3
 except ImportError:
@@ -27,8 +28,6 @@ except ImportError:
 
 __version__ = "1.0.3.0"
 
-# Some of this code has been translated from the twitter-text-java library:
-# <http://github.com/mzsanford/twitter-text-java>
 AT_SIGNS = r'[@\uff20]'
 UTF_CHARS = r'a-z0-9_\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u00ff'
 SPACES = r'[\u0020\u00A0\u1680\u180E\u2002-\u202F\u205F\u2060\u3000]'
@@ -40,7 +39,11 @@ LIST_REGEX = re.compile(LIST_PRE_CHARS + '(' + AT_SIGNS + '+)' + LIST_END_CHARS,
                         re.IGNORECASE)
 
 # Users
-USERNAME_REGEX = re.compile(r'\B' + AT_SIGNS + LIST_END_CHARS, re.IGNORECASE)
+if sys.version_info >= (3, 0):
+    username_flags = re.ASCII | re.IGNORECASE
+else:
+    username_flags = re.IGNORECASE
+USERNAME_REGEX = re.compile(r'\B' + AT_SIGNS + LIST_END_CHARS, username_flags)
 REPLY_REGEX = re.compile(r'^(?:' + SPACES + r')*' + AT_SIGNS
                          + r'([a-z0-9_]{1,20}).*', re.IGNORECASE)
 
