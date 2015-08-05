@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Unwind short-links e.g. bit.ly, t.co etc to their canonical links"""
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 import requests
 
 
@@ -26,4 +26,4 @@ def follow_shortlinks(shortlinks):
 
 if __name__ == "__main__":
     shortlinks = ['http://t.co/8o0z9BbEMu', 'http://bbc.in/16dClPF']
-    print follow_shortlinks(shortlinks)
+    print (follow_shortlinks(shortlinks))
