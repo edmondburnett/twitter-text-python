@@ -13,6 +13,12 @@ installation
     $ pip install twitter-text-python
 
 
+compatibility
+-------------
+
+twitter-text-python supports Python 2.6, 2.7, 3.3, 3.4 and 3.5.
+
+
 usage
 -----
 
