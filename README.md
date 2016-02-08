@@ -69,11 +69,16 @@ tests
 
 Run the unit tests:
 
-    $ python ttp/tests.py 
+    $ python ttp/tests.py
     ....................................................................................................
     ----------------------------------------------------------------------
     Ran 100 tests in 0.009s
     OK
+
+Or test on multiple Python versions with tox:
+
+    $ pip install tox
+    $ tox
 
 
 contributing
