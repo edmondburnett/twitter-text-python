@@ -13,6 +13,12 @@ installation
     $ pip install twitter-text-python
 
 
+compatibility
+-------------
+
+twitter-text-python supports Python 2.6, 2.7, 3.3, 3.4 and 3.5.
+
+
 usage
 -----
 
@@ -69,11 +75,16 @@ tests
 
 Run the unit tests:
 
-    $ python ttp/tests.py 
+    $ python ttp/tests.py
     ....................................................................................................
     ----------------------------------------------------------------------
     Ran 100 tests in 0.009s
     OK
+
+Or test on multiple Python versions with tox:
+
+    $ pip install tox
+    $ tox
 
 
 contributing
