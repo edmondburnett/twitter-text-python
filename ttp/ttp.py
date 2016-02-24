@@ -34,7 +34,7 @@ SPACES = r'[\u0020\u00A0\u1680\u180E\u2002-\u202F\u205F\u2060\u3000]'
 
 # Lists
 LIST_PRE_CHARS = r'([^a-z0-9_]|^)'
-LIST_END_CHARS = r'([a-z0-9_]{1,20})(/[a-z][a-z0-9\x80-\xFF-]{0,79})?'
+LIST_END_CHARS = r'([a-z0-9_]{1,30})(/[a-z][a-z0-9\x80-\xFF-]{0,79})?'
 LIST_REGEX = re.compile(LIST_PRE_CHARS + '(' + AT_SIGNS + '+)' + LIST_END_CHARS,
                         re.IGNORECASE)
 
