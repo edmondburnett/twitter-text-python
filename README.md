@@ -1,41 +1,41 @@
-twitter-text-python
+instagram-text-python
 ===================
 
-**twitter-text-python** is a Tweet parser and formatter for Python. Extract
+**instagram-text-python** is a Tweet parser and formatter for Python. Extract
 users, hashtags, URLs and format as HTML for display.
 
-PyPI release: [https://pypi.python.org/pypi/twitter-text-python/](http://pypi.python.org/pypi/twitter-text-python/)
+PyPI release: [https://pypi.python.org/pypi/instagram-text-python/](http://pypi.python.org/pypi/instagram-text-python/)
 
 
 installation
 ------------
 
-    $ pip install twitter-text-python
+    $ pip install instagram-text-python
 
 
 compatibility
 -------------
 
-twitter-text-python supports Python 2.6, 2.7, 3.3, 3.4 and 3.5.
+instagram-text-python supports Python 2.6, 2.7, 3.3, 3.4 and 3.5.
 
 
 usage
 -----
 
 ```python
->>> from ttp import ttp
->>> p = ttp.Parser()
->>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
+>>> from itp import itp
+>>> p = itp.Parser()
+>>> result = p.parse("Hey @user.name, you now support the #itp parser! https://github.com/takumihq")
 >>> result.reply
-'burnettedmond'
+'user.name'
 >>> result.users
-['burnettedmond']
+['user.name']
 >>> result.tags
-['IvoWertzel']
+['itp']
 >>> result.urls
-['https://github.com/burnettedmond/']
+['https://github.com/takumihq/']
 >>> result.html
-u'<a href="http://twitter.com/burnettedmond">@burnettedmond</a>, you now support <a href="https://twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/edburnett/">https://github.com/edburnett/</a>'
+u'<a href="http://instagram.com/user.name">@user.name</a>, you now support the <a href="https://www.instagram.com/explore/tags/itp/">#itp</a> parser! <a href="https://github.com/takumihq/">https://github.com/takumihq/</a>'
 ```
 
 If you need different HTML output just subclass and override the `format_*` methods.
@@ -43,17 +43,17 @@ If you need different HTML output just subclass and override the `format_*` meth
 You can also ask for the span tags to be returned for each entity:
 
 ```python
->>> p = ttp.Parser(include_spans=True)
->>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
+>>> p = itp.Parser(include_spans=True)
+>>> result = p.parse("Hey @user.name, you now support the #itp parser! https://github.com/takumihq")
 >>> result.urls
-[('https://github.com/burnettedmond/', (57, 87))]
+[('https://github.com/takumihq/', (57, 87))]
 ```
 
 
 To use the shortlink follower (depends on the [Requests](http://docs.python-requests.org/) library):
 
 ```python
->>> from ttp import utils
+>>> from itp import utils
 >>> # assume that result.urls == ['http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF']
 >>> print utils.follow_shortlinks(result.urls)  # pass in list of shortlink URLs
 {'http://t.co/8o0z9BbEMu': [u'http://t.co/8o0z9BbEMu', u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562'], u'http://bbc.in/16dClPF': [u'http://bbc.in/16dClPF', u'http://www.bbc.co.uk/sport/0/21711199#TWEET650562']}
@@ -64,8 +64,9 @@ To use the shortlink follower (depends on the [Requests](http://docs.python-requ
 changelog
 ---------
 
+* 2016/03/08 2.0.0 Forked [ttp](https://github.com/edburnett/twitter-text-python) to become an instagram text parser
 * 2015/04/11 1.1.0 Add basic support for Python 3
-* 2014/07/30 1.0.3 Update parsed URLs for Twitter API 1.1 compatibility
+* 2014/07/30 1.0.3 Update parsed URLs for twitter API 1.1 compatibility
 * 2013/06/01 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack), used autopep8 to clean the src, added a shortlink expander
 * 2013/02/11 1.0.0.2 released to PyPI
 
@@ -75,7 +76,7 @@ tests
 
 Run the unit tests:
 
-    $ python ttp/tests.py
+    $ python itp/tests.py
     ....................................................................................................
     ----------------------------------------------------------------------
     Ran 100 tests in 0.009s
@@ -91,21 +92,25 @@ contributing
 ------------
 
 See the relevant [wiki
-page](https://github.com/edburnett/twitter-text-python/wiki/Contributing) for
-notes on contributing to **twitter-text-python**.
+page](https://github.com/edburnett/instagram-text-python/wiki/Contributing) for
+notes on contributing to **instagram-text-python**.
 
 
 history
 -------
 
-The current version was forked by Edmond Burnett in July 2014:
+The current version was forked by TakumiHQ in March 2016 and modified to
+support instagram text parsings instead of twitter:
+https://github.com/takumihq/instagram-text-python
+
+The library won was forked by Edmond Burnett in July 2014:
 https://github.com/edburnett/twitter-text-python
 
 The library was forked by Ian Ozsvald in January 2013 and released to PyPI,
 some bugs were fixed, a few minor changes to functionality added (no longer
 supported): https://github.com/ianozsvald/twitter-text-python
 
-The original ttp comes from Ivo Wetzel (no longer supported):
+The original itp comes from Ivo Wetzel (no longer supported):
 https://github.com/BonsaiDen/twitter-text-python
 
 Originally based on

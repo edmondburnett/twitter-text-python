@@ -1,15 +1,15 @@
 from setuptools import setup
 
 setup(
-    name='twitter-text-python',
-    version='1.1.0',
-    description='Twitter Tweet parser and formatter',
-    long_description="Extract @users, #hashtags and URLs (and unwind shortened links) from tweets including entity locations, also generate HTML for output. Visit https://github.com/edburnett/twitter-text-python for examples.",
-    author='Maintained by Edmond Burnett (previously Ian Ozsvald; originally Ivo Wetzel)',
-    author_email='_@edmondburnett.com',
-    url='https://github.com/edburnett/twitter-text-python',
+    name='instagram-text-python',
+    version='2.0.0',
+    description='Instagram Tweet parser and formatter',
+    long_description="Extract @users, #hashtags and URLs (and unwind shortened links) from instagram captions and comments including entity locations, also generate HTML for output. Visit https://github.com/takumihq/instagram-text-python for examples.",
+    author='Maintained by Takumi (previously twitter-text-python, which is maintained by Edmond Burnett (previously Ian Ozsvald; originally Ivo Wetzel))',
+    author_email='itp@takumihq.com',
+    url='https://github.com/takumihq/instagram-text-python',
     license='MIT',
-    packages=['ttp'],
+    packages=['itp'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[],
