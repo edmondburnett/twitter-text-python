@@ -602,6 +602,23 @@ class TWPTestsWithSpans(unittest.TestCase):
         result = self.parser.parse(' http://some.com ', html=False)
         self.assertEqual(result.urls, [('http://some.com', (1, 16))])
 
+class TWPReplaceTests(unittest.TestCase):
+
+    def setUp(self):
+        self.parser = ttp.Parser(replace_dict={
+            "USER": "__MENTION__",
+            "URL": "__URL__",
+            })
+    def test_replace_function(self):
+        result = self.parser.parse('@user123 This is #cool and #awesome #dope', html=False)
+        self.assertEqual(result.html, "__MENTION__ This is #cool and #awesome #dope")
+        
+        p = ttp.Parser()
+        result = p.parse('@user123 This is #cool and #awesome #dope', html=False)
+        self.assertEqual(result.html, "<user> This is <hashtag> and <hashtag> <hashtag>")
+
+
+
 
 # Test it!
 if __name__ == '__main__':

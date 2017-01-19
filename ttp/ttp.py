@@ -113,14 +113,29 @@ class ParseResult(object):
         self.tags = tags if tags else []
         self.html = html
 
+REPLACE_DICT={
+        "URL": "<url>",
+        "HASHTAG": "<hashtag>",
+        "USER": "<user>",
+        "LIST": "<list>"
+        }
 
 class Parser(object):
 
     '''A Tweet Parser'''
 
-    def __init__(self, max_url_length=30, include_spans=False):
+    def __init__(self, max_url_length=30, include_spans=False,
+            replace_dict=None):
         self._max_url_length = max_url_length
         self._include_spans = include_spans
+        self._replace_dict = dict(REPLACE_DICT)
+        if replace_dict:
+            self._replace_dict = replace_dict
+        self._replacement_set = {
+                k: k in self._replace_dict
+                for k in REPLACE_DICT
+                }
+        self._to_html = False
 
     def parse(self, text, html=True):
         '''Parse the text and return a ParseResult instance.'''
@@ -131,8 +146,9 @@ class Parser(object):
 
         reply = REPLY_REGEX.match(text)
         reply = reply.groups(0)[0] if reply is not None else None
+        self._to_html = html
 
-        parsed_html = self._html(text) if html else self._text(text)
+        parsed_html = self._html(text) if html else self._replace(text)
         return ParseResult(self._urls, self._users, reply,
                            self._lists, self._tags, parsed_html)
 
@@ -150,6 +166,19 @@ class Parser(object):
         html = USERNAME_REGEX.sub(self._parse_users, html)
         html = LIST_REGEX.sub(self._parse_lists, html)
         return HASHTAG_REGEX.sub(self._parse_tags, html)
+    
+    def _replace(self, text):
+        '''Parse a Tweet and replace markers.'''
+        replaced = text
+        if self._replacement_set["URL"]:
+            replaced = URL_REGEX.sub(self._parse_urls, replaced)
+        if self._replacement_set["USER"]:
+            replaced = USERNAME_REGEX.sub(self._parse_users, replaced)
+        if self._replacement_set["LIST"]:
+            replaced = LIST_REGEX.sub(self._parse_lists, replaced)
+        if self._replacement_set["HASHTAG"]:
+            replaced = HASHTAG_REGEX.sub(self._parse_tags, replaced)
+        return replaced
 
     # Internal parser stuff ----------------------------------------------------
     def _parse_urls(self, match):
@@ -190,9 +219,10 @@ class Parser(object):
         else:
             self._urls.append(url)
 
-        if self._html:
+        if self._to_html:
             return '%s%s' % (pre, self.format_url(full_url,
                                                   self._shorten_url(escape(url))))
+        return " %s" % self._replace_dict["URL"]
 
     def _parse_users(self, match):
         '''Parse usernames.'''
@@ -207,8 +237,9 @@ class Parser(object):
         else:
             self._users.append(mat[1:])
 
-        if self._html:
+        if self._to_html:
             return self.format_username(mat[0:1], mat[1:])
+        return self._replace_dict["USER"]
 
     def _parse_lists(self, match):
         '''Parse lists.'''
@@ -224,8 +255,9 @@ class Parser(object):
         else:
             self._lists.append((user, list_name))
 
-        if self._html:
+        if self._to_html:
             return '%s%s' % (pre, self.format_list(at_char, user, list_name))
+        return self._replace_dict["LIST"]
 
     def _parse_tags(self, match):
         '''Parse hashtags.'''
@@ -249,8 +281,9 @@ class Parser(object):
         else:
             self._tags.append(text)
 
-        if self._html:
+        if self._to_html:
             return '%s%s' % (pre, self.format_tag(tag, text))
+        return " %s" % self._replace_dict["HASHTAG"]
 
     def _shorten_url(self, text):
         '''Shorten a URL and make sure to not cut of html entities.'''
