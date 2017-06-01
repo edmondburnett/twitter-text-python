@@ -271,6 +271,36 @@ class TWPTests(unittest.TestCase):
         self.assertEqual(result.html, 'text <a href="http://domain.tld">http://domain.tld</a>-that-you-should-have-put-a-space-after')
         self.assertEqual(result.urls, ['http://domain.tld'])
 
+    def test_url_followed_plus(self):
+        result = self.parser.parse('Go to http://example.com/a+')
+        self.assertEqual(result.html, 'Go to <a href="http://example.com/a+">http://example.com/a+</a>')
+        self.assertEqual(result.urls, ['http://example.com/a+'])
+
+    def test_url_followed_hyphen_only(self):
+        result = self.parser.parse('Go to http://example.com/a-')
+        self.assertEqual(result.html, 'Go to <a href="http://example.com/a-">http://example.com/a-</a>')
+        self.assertEqual(result.urls, ['http://example.com/a-'])
+
+    def test_url_query_string_followed_plus(self):
+        result = self.parser.parse('Go to http://example.com/a?token=abcd+')
+        self.assertEqual(result.html, 'Go to <a href="http://example.com/a?token=abcd+">http://example.com/a?token=...</a>')
+        self.assertEqual(result.urls, ['http://example.com/a?token=abcd+'])
+
+    def test_url_query_string_followed_hyphen_only(self):
+        result = self.parser.parse('Go to http://example.com/a?token=abcd-')
+        self.assertEqual(result.html, 'Go to <a href="http://example.com/a?token=abcd-">http://example.com/a?token=...</a>')
+        self.assertEqual(result.urls, ['http://example.com/a?token=abcd-'])
+
+    def test_url_and_url_query_string_followed_plus(self):
+        result = self.parser.parse('Go to http://example.com/a-?token=abcd+')
+        self.assertEqual(result.html, 'Go to <a href="http://example.com/a-?token=abcd+">http://example.com/a-?token...</a>')
+        self.assertEqual(result.urls, ['http://example.com/a-?token=abcd+'])
+
+    def test_url_and_url_query_string_followed_hyphen_only(self):
+        result = self.parser.parse('Go to http://example.com/a+?token=abcd-')
+        self.assertEqual(result.html, 'Go to <a href="http://example.com/a+?token=abcd-">http://example.com/a+?token...</a>')
+        self.assertEqual(result.urls, ['http://example.com/a+?token=abcd-'])
+
     # URL preceeded Tests -------------------------------------------------------
     def test_url_preceeded_colon(self):
         result = self.parser.parse('text:http://example.com')
