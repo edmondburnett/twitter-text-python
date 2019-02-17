@@ -16,7 +16,7 @@ installation
 compatibility
 -------------
 
-twitter-text-python supports Python 2.6, 2.7, 3.3, 3.4 and 3.5.
+twitter-text-python has been tested with Python 2.6, 2.7, 3.3, 3.4, 3.5, and 3.7.
 
 
 usage
@@ -64,6 +64,7 @@ To use the shortlink follower (depends on the [Requests](http://docs.python-requ
 changelog
 ---------
 
+* 2019/02/17 1.1.1 Minor release to fix Python 3 support for utils.py, test with 3.7
 * 2015/04/11 1.1.0 Add basic support for Python 3
 * 2014/07/30 1.0.3 Update parsed URLs for Twitter API 1.1 compatibility
 * 2013/06/01 1.0.1 new working version, adding comma parse fix (thanks https://github.com/muckrack), used autopep8 to clean the src, added a shortlink expander
