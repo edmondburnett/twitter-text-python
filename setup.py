@@ -7,7 +7,7 @@ setup(
     long_description="Extract @users, #hashtags and URLs (and unwind shortened links) from tweets including entity locations, also generate HTML for output. Visit https://github.com/edburnett/twitter-text-python for examples.",
     author='Maintained by Edmond Burnett (previously Ian Ozsvald; originally Ivo Wetzel)',
     author_email='_@edmondburnett.com',
-    url='https://github.com/edburnett/twitter-text-python',
+    url='https://github.com/edmondburnett/twitter-text-python',
     license='MIT',
     packages=['ttp'],
     include_package_data=True,

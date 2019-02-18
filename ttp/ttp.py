@@ -11,7 +11,7 @@
 #  twitter-text-python. If not, see <http://opensource.org/licenses/MIT>.
 #
 #  Maintained by Edmond Burnett:
-#  https://github.com/edburnett/twitter-text-python
+#  https://github.com/edmondburnett/twitter-text-python
 #  (previously Ian Ozsvald and Ivo Wetzel)
 
 

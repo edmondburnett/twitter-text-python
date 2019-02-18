@@ -25,7 +25,7 @@ usage
 ```python
 >>> from ttp import ttp
 >>> p = ttp.Parser()
->>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
+>>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edmondburnett/")
 >>> result.reply
 'burnettedmond'
 >>> result.users
@@ -35,7 +35,7 @@ usage
 >>> result.urls
 ['https://github.com/burnettedmond/']
 >>> result.html
-u'<a href="http://twitter.com/burnettedmond">@burnettedmond</a>, you now support <a href="https://twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/edburnett/">https://github.com/edburnett/</a>'
+u'<a href="http://twitter.com/burnettedmond">@burnettedmond</a>, you now support <a href="https://twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/edmondburnett/">https://github.com/edmondburnett/</a>'
 ```
 
 If you need different HTML output just subclass and override the `format_*` methods.
@@ -44,7 +44,7 @@ You can also ask for the span tags to be returned for each entity:
 
 ```python
 >>> p = ttp.Parser(include_spans=True)
->>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edburnett/")
+>>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edmondburnett/")
 >>> result.urls
 [('https://github.com/burnettedmond/', (57, 87))]
 ```
@@ -92,7 +92,7 @@ contributing
 ------------
 
 See the relevant [wiki
-page](https://github.com/edburnett/twitter-text-python/wiki/Contributing) for
+page](https://github.com/edmondburnett/twitter-text-python/wiki/Contributing) for
 notes on contributing to **twitter-text-python**.
 
 
@@ -100,7 +100,7 @@ history
 -------
 
 The current version was forked by Edmond Burnett in July 2014:
-https://github.com/edburnett/twitter-text-python
+https://github.com/edmondburnett/twitter-text-python
 
 The library was forked by Ian Ozsvald in January 2013 and released to PyPI,
 some bugs were fixed, a few minor changes to functionality added (no longer
