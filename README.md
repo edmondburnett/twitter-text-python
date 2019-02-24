@@ -33,7 +33,7 @@ usage
 >>> result.tags
 ['IvoWertzel']
 >>> result.urls
-['https://github.com/burnettedmond/']
+['https://github.com/edmondburnett/']
 >>> result.html
 u'<a href="http://twitter.com/burnettedmond">@burnettedmond</a>, you now support <a href="https://twitter.com/search?q=%23IvoWertzel">#IvoWertzel</a>\'s tweet parser! <a href="https://github.com/edmondburnett/">https://github.com/edmondburnett/</a>'
 ```
@@ -46,7 +46,7 @@ You can also ask for the span tags to be returned for each entity:
 >>> p = ttp.Parser(include_spans=True)
 >>> result = p.parse("@burnettedmond, you now support #IvoWertzel's tweet parser! https://github.com/edmondburnett/")
 >>> result.urls
-[('https://github.com/burnettedmond/', (57, 87))]
+[('https://github.com/edmondburnett/', (57, 87))]
 ```
 
 

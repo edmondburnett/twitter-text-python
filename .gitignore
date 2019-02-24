@@ -1,7 +1,7 @@
 *~
 *.swp
 *.pyc
-TODO
+TODO.md
 ENV/
 dist/
 twitter_text_python.egg-info/
