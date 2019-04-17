@@ -61,8 +61,8 @@ QUERY_CHARS = r'[a-z0-9!\*\'\(\);:&=\+\$/%#\[\]\-_\.,~]'
 # Valid end-of-path chracters (so /foo. does not gobble the period).
 # 1. Allow ) for Wikipedia URLs.
 # 2. Allow =&# for empty URL parameters and other URL-join artifacts
-PATH_ENDING_CHARS = r'[%s\)=#/]' % UTF_CHARS
-QUERY_ENDING_CHARS = '[a-z0-9_&=#]'
+PATH_ENDING_CHARS = r'[%s\)=#/\-\+]' % UTF_CHARS
+QUERY_ENDING_CHARS = '[a-z0-9_&=#\-\+]'
 
 URL_REGEX = re.compile('((%s)((https?://|www\\.)(%s)(\/(%s*%s)?)?(\?%s*%s)?))'
                        % (PRE_CHARS, DOMAIN_CHARS, PATH_CHARS,
