@@ -9,3 +9,5 @@ jobs:
                 name: Run unit tests
                 command: |
                     python ttp/tests.py
+            - store_test_results:
+                path: test-results/

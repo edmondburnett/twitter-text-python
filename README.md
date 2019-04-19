@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/edmondburnett/twitter-text-python.svg?style=svg)](https://circleci.com/gh/edmondburnett/twitter-text-python)
+
+
 twitter-text-python
 ===================
 
