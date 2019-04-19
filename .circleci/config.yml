@@ -9,5 +9,9 @@ jobs:
                 name: Run unit tests
                 command: |
                     python ttp/tests.py
+            - run:
+                name: Create test-results directory
+                command: |
+                    mkdir /tmp/test-results
             - store_test_results:
-                path: test-results/
+                path: /tmp/test-results
