@@ -1,0 +1,11 @@
+version: 2
+jobs:
+    build:
+        docker:
+            - image: circleci/python:3.7.1
+        steps:
+            - checkout
+            - run:
+                name: Run unit tests
+                command: |
+                    python ttp/tests.py
