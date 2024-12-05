@@ -7,6 +7,8 @@ twitter-text-python
 **twitter-text-python** is a Tweet parser and formatter for Python. Extract
 users, hashtags, URLs and format as HTML for display.
 
+**Note**: Since the Twitter public API was effectively killed by the new ownership, and the paywall makes testing and development impractical, this module will no longer be actively maintained. It should work fine with any existing API data.
+
 PyPI release: [https://pypi.org/project/twitter-text-python/](https://pypi.org/project/twitter-text-python/)
 
 
